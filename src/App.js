@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import MolarityCalculator from './components/MolarityCalculator';
+import DilutionCalculator from './components/DilutionCalculator';
+import PercentCalculator from './components/PercentCalculator';
+import FormulaWCalculator from './components/FormulaWCalculator';
+import BeerLambertCalculator from './components/BeerLambertCalculator';
+import GForceCalculator from './components/GForceCalculator';
+import UnitConverter from './components/UnitConverter';
+import PCRCalculator from './components/PCRCalculator';
+import Calculator from './components/Calculator';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-container font-sans">
+      <Router>
+        <Navbar />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Home />} className='max-w-full'/>
+            <Route path="/molarity" element={<MolarityCalculator />} />
+            <Route path="/dilution" element={<DilutionCalculator />} />
+            <Route path="/percent" element={<PercentCalculator />} />
+            <Route path="/formula" element={<FormulaWCalculator />} />
+            <Route path="/absorbance" element={<BeerLambertCalculator />} />
+            <Route path="/rcfrpm" element={<GForceCalculator />} />
+            <Route path="/unitConversion" element={<UnitConverter />} />
+            <Route path="/pcr" element={<PCRCalculator />} />
+            <Route path="/calculator" element={<Calculator />} />
+          </Routes>
+        </div>
+      </Router>
     </div>
   );
 }

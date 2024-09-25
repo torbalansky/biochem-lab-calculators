@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: rgb(19, 27, 34);
+  margin: 0;
+}
+.rotate-360 {
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .rotate-360:hover {
+    transform: rotate(360deg);
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .rotate-180 {
+    animation: rotate 5s linear infinite;
+  }
+  
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  @media (max-width: 1024px) {
+    .app-container {
+      height: auto;
+      overflow: auto;
+    }
+  }
+
+ @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 5s forwards;
+  }
+
+.calculator-field {
+  background-color: #1e293b;
+  border: 2px solid #70bbac;
+  color: white;
+  padding: 1rem;
+  align-items: center;
+  border-radius: 12px;
+  transition: transform 0.3s ease-in-out, background-color 0.3s;
+  cursor: pointer;
+}
+
+.calculator-field-2 {
+  background-color: #1e293b;
+  border: 2px solid #70bbac;
+  color: rgb(255, 255, 255);
+  padding: 1rem;
+  align-items: center;
+  border-radius: 100px;
+  transition: transform 0.3s ease-in-out, background-color 0.3s;
+  cursor: pointer;
+  margin: 50px;
+}
+
+.calculator-field:hover, .calculator-field-2:hover {
+  background-color: #475569;
+  transform: translateY(-5px);
+}
+
+@media print {
+  body {
+      margin: 0;
+      background-color: white !important;
+      color: black !important;
+  }
+  .labbook, .calculator {
+      page-break-inside: avoid;
+      margin: 0;
+      padding: 20px;
+  }
+  button {
+      display: none;
+  }
+  textarea {
+      overflow: visible !important;
+      height: auto !important;
+      resize: none;
+  }
+  .calculator {
+      display: none;
+  }
+  .no-print {
+      display: none;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+@media (max-width: 1024px) {
+  .content {
+    height: auto;
+    overflow: auto;
+  }
+}
+
