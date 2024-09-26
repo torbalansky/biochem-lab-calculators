@@ -23,44 +23,46 @@ body {
     }
   }
   
-  .rotate-180 {
-    animation: rotate 5s linear infinite;
-  }
+.rotate-180 {
+  animation: rotate 5s linear infinite;
+}
   
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  width: 100%;
+}
   
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+  
+@media (max-width: 1024px) {
   .app-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
+    height: auto;
+    overflow: auto;
   }
-  
-  @media (max-width: 1024px) {
-    .app-container {
-      height: auto;
-      overflow: auto;
-    }
-  }
+}
 
- @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-  .animate-fadeIn {
-    animation: fadeIn 5s forwards;
-  }
+.animate-fadeIn {
+  animation: fadeIn 5s forwards;
+}
 
 .calculator-field {
   background-color: #1e293b;
@@ -132,3 +134,56 @@ body {
   }
 }
 
+@supports (-ms-ime-align: auto) {
+  .app-container {
+    height: auto;
+    flex-wrap: wrap;
+  }
+  .content {
+    height: auto;
+    flex-wrap: wrap;
+  }
+}
+
+@media (min-device-height: 1366px) {
+    .home-content {
+        width:100%;
+        height: max-content;
+        font-size: 30px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .home-content {
+        padding: 20px;
+        line-height: 1.5;
+    }
+
+    .home-icon {
+      display: none;
+    }
+
+    h1, p {
+      justify-content: start;
+      text-align: start;
+      font-weight: 200;
+      margin-bottom: 20px;
+    }
+
+    .tablet-content {
+      padding: 20px 100px 20px 100px;
+
+    }
+
+    .calculator-field {
+      width: 220px;
+      height: 200px;
+      background-color: #ade6da;
+      border: 2px solid #ffffff;
+      color: #1e293b;
+      padding: 1rem;
+      text-align: center;
+      align-items: center;
+    }
+}

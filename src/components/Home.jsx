@@ -12,8 +12,8 @@ const CalculatorHomePage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col justify-between items-center bg-slate-900 text-white font-sans" data-aos="zoom-in-up">
-      <div className="w-11/12 max-w-screen-lg mt-8 mb-12 flex flex-col lg:flex-row lg:justify-between gap-12">
+    <div className="min-h-screen flex flex-col justify-between items-center bg-slate-900 text-white font-sans home-content" data-aos="zoom-in-up">
+      <div className="w-11/12 max-w-screen-lg mt-8 mb-12 flex flex-col lg:flex-row lg:justify-between gap-12 home-content">
         <div className="lg:w-1/2 flex flex-col items-start lg:items-start text-center lg:text-left mt-4">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
             Welcome to the Scientific Calculators Hub
@@ -27,56 +27,56 @@ const CalculatorHomePage = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:w-1/2">
           <Link to="/molarity" className="calculator-field">
-            <span className="flex items-center justify-center text-lg font-semibold">
+            <span className="flex items-center justify-center text-md font-semibold">
               <TbSquareLetterM className="h-10 w-10 mr-2 home-icon" />
               Mass Molarity Calculator
             </span>
           </Link>
 
           <Link to="/dilution" className="calculator-field">
-            <span className="flex items-center justify-center text-lg font-semibold">
+            <span className="flex items-center justify-center text-md font-semibold">
               <GiConcentrationOrb className="h-8 w-8 mr-2 home-icon" />
               Dilute a stock solution
             </span>
           </Link>
 
           <Link to="/percent" className="calculator-field">
-            <span className="flex items-center justify-center text-lg font-semibold">
+            <span className="flex items-center justify-center text-md font-semibold">
               <GiChemicalBolt className="h-8 w-8 mr-2 home-icon" />
-              Percent (%) Solutions Calculator
+              Percent Solution Calculator
             </span>
           </Link>
 
           <Link to="/formula" className="calculator-field">
-            <span className="flex items-center justify-center text-lg font-semibold">
+            <span className="flex items-center justify-center text-md font-semibold">
               <SiMoleculer className="h-8 w-8 mr-2 home-icon" />
               Formula Weight Calculator
             </span>
           </Link>
 
           <Link to="/absorbance" className="calculator-field">
-            <span className="flex items-center justify-center text-lg font-semibold">
+            <span className="flex items-center justify-center text-md font-semibold">
               <TbSquareLetterA className="h-10 w-10 mr-2 home-icon" />
               Beer-Lambert Law calculator
             </span>
           </Link>
 
           <Link to="/rcfrpm" className="calculator-field">
-            <span className="flex items-center justify-center text-lg font-semibold">
+            <span className="flex items-center justify-center text-md font-semibold">
               <GiConcentricCrescents className="h-8 w-8 mr-2 home-icon" />
-              RCF to RPM Calculator
+              RCF to RPM Calculator (g-force)
             </span>
           </Link>
 
           <Link to="/PCR" className="calculator-field">
-            <span className="flex items-center justify-center text-lg font-semibold">
+            <span className="flex items-center justify-center text-md font-semibold">
               <GiDna2 className="h-8 w-8 mr-2 home-icon" />
               PCR Master Mix Calculator
             </span>
           </Link>
 
           <Link to="/unitConversion" className="calculator-field">
-            <span className="flex items-center justify-center text-lg font-semibold">
+            <span className="flex items-center justify-center text-md font-semibold">
               <TbRulerMeasure className="h-8 w-8 mr-2 home-icon" />
               Unit Conversion tool
             </span>

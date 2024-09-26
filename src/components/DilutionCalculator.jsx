@@ -142,20 +142,33 @@ const DilutionCalculator = () => {
 
   return (
     <div className="flex flex-col lg:flex-row text-center text-white bg-slate-900 app-container font-sans" data-aos="zoom-out-down">
-      <div className="flex-1 p-4 bg-slate-100 text-gray-800 overflow-y-auto text-left">
+      <div className="flex-1 p-4 bg-slate-100 text-gray-800 overflow-y-auto overflow-x-hidden text-left">
         <h2 className="w-screen flex text-2xl font-bold mb-4 bg-gray-300 text-left p-2"><FaBookOpen className='h-6 w-6 mt-2 mr-2' />Theory
         </h2>
         <div>
           <p className="mb-4">
-            <strong>What is Dilution?</strong><br />
-            Dilution refers to the process of lowering the concentration of a solute in a solution. This is typically achieved by adding more solvent.
+            <strong>What is Dilution?</strong><br /><br />
+            Dilution refers to the process of lowering the concentration of a solution with known molarity. 
+            This is typically achieved by adding more solvent.
           </p>
           <p className="mb-4">
-            <strong>How are Concentrations and Volumes Related?</strong><br />
-            The formula for dilution is:<br />
-            <strong>C1 × V1 = C2 × V2</strong><br />
+            <strong>How are Concentrations and Volumes Related?</strong><br /><br />
+            The formula used is:<br /><br />
+            <strong>C1 × V1 = C2 × V2</strong><br /><br />
             Where <strong>C1</strong> is the concentration of the stock solution, <strong>V1</strong> is the volume of stock solution required, <strong>C2</strong> is the desired concentration, and <strong>V2</strong> is the final volume.
           </p>
+          <br />
+            <p><strong>Example:</strong></p><br />
+            <p>
+            Use the following variables:
+              <br /><br />
+              Stock concentration (C1) = 0.5 (M)
+              <br /><br />
+              Desired concentration (C2) = 0.1 (M)
+              <br /><br />
+              Final Volume (V2) = 1 (L)
+            </p><br />
+            <p className="mb-4"><strong>The result is V1 = 0.2 (L)</strong></p>
         </div>
       </div>
 
@@ -191,30 +204,6 @@ const DilutionCalculator = () => {
 
           <div className="flex flex-col sm:flex-row sm:items-center">
             <div className="flex-1">
-              <label className="block mb-1 text-left">Final Volume (V2):</label>
-              <input
-                type="number"
-                value={finalVolume !== null ? finalVolume : ''}
-                onChange={(e) => setFinalVolume(e.target.value !== '' ? parseFloat(e.target.value) : null)}
-                className="w-full p-2 border text-sm bg-gray-600 rounded"
-                placeholder="Enter final volume"
-              />
-            </div>
-            <div className="mt-2 sm:mt-6 sm:ml-4">
-              <select
-                value={finalVolumeUnit}
-                onChange={(e) => setFinalVolumeUnit(e.target.value)}
-                className="w-full px-4 py-2 bg-gray-100 cursor-pointer text-slate-800 rounded text-md"
-              >
-                <option value="L">Liter/s (L)</option>
-                <option value="mL">milliL (mL)</option>
-                <option value="μL">microL (μL)</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row sm:items-center">
-            <div className="flex-1">
               <label className="block mb-1 text-left">Desired Concentration (C2):</label>
               <input
                 type="number"
@@ -236,6 +225,30 @@ const DilutionCalculator = () => {
                 <option value="nM">nanoM (nM)</option>
                 <option value="pM">picoM (pM)</option>
                 <option value="fM">femtoM (fM)</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row sm:items-center">
+            <div className="flex-1">
+              <label className="block mb-1 text-left">Final Volume (V2):</label>
+              <input
+                type="number"
+                value={finalVolume !== null ? finalVolume : ''}
+                onChange={(e) => setFinalVolume(e.target.value !== '' ? parseFloat(e.target.value) : null)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+                placeholder="Enter final volume"
+              />
+            </div>
+            <div className="mt-2 sm:mt-6 sm:ml-4">
+              <select
+                value={finalVolumeUnit}
+                onChange={(e) => setFinalVolumeUnit(e.target.value)}
+                className="w-full px-4 py-2 bg-gray-100 cursor-pointer text-slate-800 rounded text-md"
+              >
+                <option value="L">Liter/s (L)</option>
+                <option value="mL">milliL (mL)</option>
+                <option value="μL">microL (μL)</option>
               </select>
             </div>
           </div>

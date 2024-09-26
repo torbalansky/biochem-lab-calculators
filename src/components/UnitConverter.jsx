@@ -124,38 +124,38 @@ const UnitConverter = () => {
   const renderTheory = () => {
     return (
       <div>
-        <h3>Theory of Unit Conversions</h3>
+        <p><strong>Theory of Unit Conversions</strong></p> <br />
         <p>Unit conversions are essential in science and engineering to ensure consistency and accuracy in measurements.</p>
         
         {selectedConversion === 'temperature' && (
-          <div>
-            <h4>Temperature Conversion</h4>
+          <div><br />
+            <p><strong>Temperature Conversion</strong></p><br />
             <p>Temperature is a measure of the thermal energy of a system and can be expressed in three primary units:</p>
-            <ul>
-              <li><strong>Celsius (°C)</strong>: Widely used in most parts of the world. Water freezes at 0°C and boils at 100°C under standard conditions.</li>
-              <li><strong>Fahrenheit (°F)</strong>: Commonly used in the United States. Water freezes at 32°F and boils at 212°F.</li>
-              <li><strong>Kelvin (K)</strong>: Used in scientific contexts, particularly in physics. The Kelvin scale starts at absolute zero, the theoretical point where all molecular motion stops, with 0K equivalent to -273.15°C. Water freezes at 273.15K and boils at 373.15K.</li>
+            <ul><br />
+              <li><strong>Celsius (°C)</strong>: Widely used in most parts of the world. Water freezes at 0°C and boils at 100°C under standard conditions.</li><br />
+              <li><strong>Fahrenheit (°F)</strong>: Commonly used in the United States. Water freezes at 32°F and boils at 212°F.</li><br />
+              <li><strong>Kelvin (K)</strong>: Used in scientific contexts, particularly in physics. The Kelvin scale starts at absolute zero, the theoretical point where all molecular motion stops, with 0K equivalent to -273.15°C. Water freezes at 273.15K and boils at 373.15K.</li><br />
             </ul>
-            <p>Conversions between these units can be done using the following formulas:</p>
+            <p>Conversions between these units can be done using the following formulas:</p><br />
             <ul>
-              <li>From Celsius to Fahrenheit: \( F = (C \times \frac{9}{5}) + 32 \)</li>
-              <li>From Fahrenheit to Celsius: \( C = (F - 32) \times \frac{5}{9} \)</li>
-              <li>From Celsius to Kelvin: \( K = C + 273.15 \)</li>
-              <li>From Kelvin to Celsius: \( C = K - 273.15 \)</li>
+              <li>From Celsius to Fahrenheit: \( F = (C \times \frac{9}{5}) + 32 \)</li><br />
+              <li>From Fahrenheit to Celsius: \( C = (F - 32) \times \frac{5}{9} \)</li><br />
+              <li>From Celsius to Kelvin: \( K = C + 273.15 \)</li><br />
+              <li>From Kelvin to Celsius: \( C = K - 273.15 \)</li><br />
             </ul>
           </div>
         )}
   
         {selectedConversion === 'length' && (
-          <div>
-            <h4>Length Conversion</h4>
+          <div><br />
+            <h4><strong>Length Conversion</strong></h4><br />
             <p>Length is a measure of distance and can be expressed in various units, depending on the scale of measurement. Common units of length include:</p>
-            <ul>
-              <li><strong>Meters (m)</strong>: The base unit of length in the International System of Units (SI).</li>
-              <li><strong>Centimeters (cm)</strong>: Equal to one-hundredth of a meter (1 m = 100 cm).</li>
-              <li><strong>Millimeters (mm)</strong>: Equal to one-thousandth of a meter (1 m = 1000 mm).</li>
-              <li><strong>Micrometers (µm)</strong>: Equal to one-millionth of a meter (1 m = 1,000,000 µm).</li>
-              <li><strong>Nanometers (nm)</strong>: Equal to one-billionth of a meter (1 m = 1,000,000,000 nm).</li>
+            <ul><br />
+              <li><strong>Meters (m)</strong>: The base unit of length in the International System of Units (SI).</li><br />
+              <li><strong>Centimeters (cm)</strong>: Equal to one-hundredth of a meter (1 m = 100 cm).</li><br />
+              <li><strong>Millimeters (mm)</strong>: Equal to one-thousandth of a meter (1 m = 1000 mm).</li><br />
+              <li><strong>Micrometers (µm)</strong>: Equal to one-millionth of a meter (1 m = 1,000,000 µm).</li><br />
+              <li><strong>Nanometers (nm)</strong>: Equal to one-billionth of a meter (1 m = 1,000,000,000 nm).</li><br />
             </ul>
             <p>Conversions between these units are based on powers of ten:</p>
             <ul>
@@ -165,51 +165,51 @@ const UnitConverter = () => {
         )}
   
         {selectedConversion === 'density' && (
-          <div>
-            <h4>Density Conversion</h4>
-            <p>Density is defined as mass per unit volume and is commonly expressed in:</p>
+          <div><br />
+            <p><strong>Density Conversion</strong></p>
+            <p>Density is defined as mass per unit volume and is commonly expressed in:</p><br />
+            <ul><br />
+              <li><strong>kg/m³</strong>: Kilograms per cubic meter, the SI unit for density.</li><br />
+              <li><strong>g/cm³</strong>: Grams per cubic centimeter, often used for smaller objects or substances.</li><br />
+            </ul><br />
+            <p>To convert between these units, the following relationship is used:</p><br />
             <ul>
-              <li><strong>kg/m³</strong>: Kilograms per cubic meter, the SI unit for density.</li>
-              <li><strong>g/cm³</strong>: Grams per cubic centimeter, often used for smaller objects or substances.</li>
-            </ul>
-            <p>To convert between these units, the following relationship is used:</p>
-            <ul>
-              <li>1 g/cm³ = 1000 kg/m³</li>
+              <li>1 g/cm³ = 1000 kg/m³</li><br />
             </ul>
           </div>
         )}
   
         {selectedConversion === 'weight' && (
-          <div>
-            <h4>Weight Conversion</h4>
-            <p>Weight refers to the mass of an object and can be measured in several units:</p>
+          <div><br />
+            <p><strong>Weight Conversion</strong></p><br />
+            <p>Weight refers to the mass of an object and can be measured in several units:</p><br />
             <ul>
-              <li><strong>Kilograms (kg)</strong>: The base unit of mass in the SI system.</li>
-              <li><strong>Grams (g)</strong>: One-thousandth of a kilogram (1 kg = 1000 g).</li>
-              <li><strong>Milligrams (mg)</strong>: One-thousandth of a gram (1 g = 1000 mg).</li>
+              <li><strong>Kilograms (kg)</strong>: The base unit of mass in the SI system.</li><br />
+              <li><strong>Grams (g)</strong>: One-thousandth of a kilogram (1 kg = 1000 g).</li><br />
+              <li><strong>Milligrams (mg)</strong>: One-thousandth of a gram (1 g = 1000 mg).</li><br />
               <li><strong>Pounds (lbs)</strong>: A unit commonly used in the United States, where 1 kg ≈ 2.20462 lbs.</li>
-            </ul>
-            <p>Conversions between these units follow the relationships:</p>
+            </ul><br />
+            <p>Conversions between these units follow the relationships:</p><br />
             <ul>
-              <li>1 kilogram = 1000 grams = 1,000,000 milligrams</li>
+              <li>1 kilogram = 1000 grams = 1,000,000 milligrams</li><br />
               <li>1 kilogram ≈ 2.20462 pounds</li>
             </ul>
           </div>
         )}
   
         {selectedConversion === 'volume' && (
-          <div>
-            <h4>Volume Conversion</h4>
-            <p>Volume refers to the amount of space an object or substance occupies and can be measured in different units:</p>
+          <div><br />
+            <p><strong>Volume Conversion</strong></p><br />
+            <p>Volume refers to the amount of space an object or substance occupies and can be measured in different units:</p><br />
             <ul>
-              <li><strong>Liters (L)</strong>: A metric unit of volume, commonly used for liquids.</li>
-              <li><strong>Milliliters (mL)</strong>: One-thousandth of a liter (1 L = 1000 mL).</li>
-              <li><strong>Cubic Meters (m³)</strong>: The SI unit for volume, often used for larger volumes (1 m³ = 1000 L).</li>
-              <li><strong>Cubic Centimeters (cm³)</strong>: A metric unit equal to one-thousandth of a liter (1 cm³ = 1 mL).</li>
+              <li><strong>Liters (L)</strong>: A metric unit of volume, commonly used for liquids.</li><br />
+              <li><strong>Milliliters (mL)</strong>: One-thousandth of a liter (1 L = 1000 mL).</li><br />
+              <li><strong>Cubic Meters (m³)</strong>: The SI unit for volume, often used for larger volumes (1 m³ = 1000 L).</li><br />
+              <li><strong>Cubic Centimeters (cm³)</strong>: A metric unit equal to one-thousandth of a liter (1 cm³ = 1 mL).</li><br />
             </ul>
-            <p>Common volume conversions include:</p>
-            <ul>
-              <li>1 liter = 1000 milliliters = 1000 cubic centimeters</li>
+            <p>Common volume conversions include:</p><br />
+            <ul><br />
+              <li>1 liter = 1000 milliliters = 1000 cubic centimeters</li><br />
               <li>1 cubic meter = 1000 liters</li>
             </ul>
           </div>
@@ -220,7 +220,7 @@ const UnitConverter = () => {
 
   return (
     <div className="flex flex-col lg:flex-row text-center text-white bg-slate-900 app-container">
-      <div className="flex-1 p-4 bg-slate-100 text-gray-800 overflow-y-auto text-left">
+      <div className="flex-1 p-4 bg-slate-100 text-gray-800 overflow-y-auto overflow-x-hidden text-left">
         <h2 className="w-screen flex text-2xl font-bold mb-4 bg-gray-300 text-left p-2">
           <FaExchangeAlt className="h-6 w-6 mt-2 mr-2" />
           Unit Converter

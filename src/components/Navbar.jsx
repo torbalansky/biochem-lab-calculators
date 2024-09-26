@@ -25,16 +25,24 @@ const Navbar = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
-  const handleClickOutside = (event) => {
+   const handleClickOutsideMenu = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
       setMenuOpen(false);
     }
   };
 
+  const handleClickOutsideDropdown = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdownOpen(false);
+    }
+  };
+
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutsideMenu);
+    document.addEventListener('mousedown', handleClickOutsideDropdown);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutsideMenu);
+      document.removeEventListener('mousedown', handleClickOutsideDropdown);
     };
   }, []);
 
@@ -65,7 +73,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="p-4 text-neonBlue  bg-slate-900 flex justify-between items-center font-sans top-0 z-50 sticky">
+    <nav className="p-4 text-neonBlue bg-slate-900 flex justify-between items-center font-sans top-0 z-50 sticky tablet-content">
       <div className="container flex justify-between items-center w-full">
         <button className='flex items-center gap-2 font-semibold text-3xl' onClick={() => handleNavigation('/')} data-aos="fade-right">
           <TbSquareLetterB className="rotate-360 cursor-pointer" />
@@ -81,7 +89,7 @@ const Navbar = () => {
         >
           {menuOpen ? <IoCloseSharp /> : <IoMenuSharp className='w-10 h-10' />}
         </button>
-        <div className="hidden md:flex" data-aos="fade-left">
+        <div className="hidden md:flex navbar" data-aos="fade-left">
           <ul className="flex space-x-4">
             <li>
               <button
@@ -95,7 +103,7 @@ const Navbar = () => {
             <Link to="/calculator" className="mt-2 text-white hover:text-neonBlue" title="LabBook and Calculator">
             <TfiPencilAlt className="h-8 w-6 mr-2"/>
             </Link>
-            <li className="relative">
+            <li className="relative" ref={dropdownRef}>
               <button
                 onClick={toggleDropdown}
                 className="w-64 bg-gray-700 p-3 text-neonBlue hover:bg-gray-600"
@@ -124,10 +132,10 @@ const Navbar = () => {
           className={`md:hidden fixed top-0 right-0 w-64 bg-gray-800 text-white h-full transition-transform transform ${menuOpen ? 'translate-x-0' : 'translate-x-full'} ease-in-out duration-300`}
         >
           <button
-            className="p-4 text-2xl"
+            className="p-2 flex justify-end text-2xl w-full"
             onClick={toggleMenu}
           >
-            <IoCloseSharp />
+            <IoCloseSharp className='w-8 h-8'/>
           </button>
           <ul className="p-4 flex flex-col gap-4">
             <li>

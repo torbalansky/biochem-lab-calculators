@@ -85,7 +85,7 @@ const FormulaWCalculator = () => {
 
   return (
     <div className="flex flex-col lg:flex-row text-center text-white bg-slate-900 app-container font-sans" data-aos="fade-right">
-      <div className="flex-1 p-4 bg-slate-100 text-gray-800 overflow-y-auto text-left">
+      <div className="flex-1 p-4 bg-slate-100 text-gray-800 overflow-y-auto overflow-x-hidden text-left">
         <h2 className="w-screen flex text-2xl font-bold mb-4 bg-gray-300 text-left p-2">
           <FaBookOpen className="h-6 w-6 mt-2 mr-2" />
           Theory
@@ -93,7 +93,7 @@ const FormulaWCalculator = () => {
         <div>
           <p className="mb-4">
             <strong>What is Molecular Weight?</strong>
-            <br />
+            <br /><br />
             Molecular weight (or molar mass) is the mass of a molecule of a substance. It's calculated as the sum of the atomic weights of the atoms in the molecular formula.
           </p>
           <p className="mb-4">
@@ -102,12 +102,22 @@ const FormulaWCalculator = () => {
           <p className="mb-4">
             The formula weight can be calculated by multiplying the number of atoms of each element by the molar mass of that element and summing the results for all the elements in the compound.
           </p>
+          <p className="mb-4">
+          Another commonly used unit of mass is the Dalton (Da), also known as the unified atomic mass unit (u),
+           particularly when discussing atomic and molecular masses. This unit is defined as one-twelfth of the 
+           mass of a carbon-12 atom and is sometimes referred to as "amu" in older literature. <br /><br />
+          A significant concept in this area is Avogadro's number (NA), which is approximately 6.0221 x 10²³. 
+          The term "mole" refers to the quantity of substance that has a mass equivalent to its molecular 
+          (or atomic) weight in grams. For instance, one mole of a substance with a molecular mass of one (1)
+          gram will contain Avogadro's number of molecules. Using this calculator, you can determine that, 
+          for example, a pollution concentration of 1 gram of benzene in a specific volume of water equates to 
+          approximately 7.7098 × 10²¹ molecules of benzene affecting that water!`
+          </p>
         </div>
       </div>
 
       <div className="flex-1 p-6 bg-gray-700 flex flex-col">
         <h1 className="text-2xl font-bold mb-6">Formula Weight Calculator</h1>
-
         <div className="mb-4">
           <label className="block mb-1 text-left">Enter Chemical Formula:</label>
           <input

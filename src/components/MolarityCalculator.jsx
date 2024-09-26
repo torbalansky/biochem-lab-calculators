@@ -1,5 +1,3 @@
-// src/components/MolarityCalculator.jsx
-
 import React, { useState, useEffect } from 'react';
 import { BiMessageRoundedError } from "react-icons/bi";
 import { FaWeight, FaBookOpen   } from "react-icons/fa";
@@ -8,6 +6,7 @@ import { GiConcentricCrescents } from "react-icons/gi";
 import { IoBeakerOutline, IoBeaker  } from "react-icons/io5";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Link } from 'react-router-dom';
 
 const MolarityCalculator = () => {
   const [formulaWeight, setFormulaWeight] = useState('');
@@ -87,7 +86,7 @@ const MolarityCalculator = () => {
       setMass('');
       setErrorMessage('');
     }
-  }, [formulaWeight, volume, volumeUnit, concentration, concentrationUnit]);
+  }, [formulaWeight, volume, volumeUnit, concentration, concentrationUnit, concentrationConversions, volumeConversions ]);
 
   const handleClearFields = () => {
     setFormulaWeight('');
@@ -104,8 +103,8 @@ const MolarityCalculator = () => {
   }, []);
 
   return (
-    <div className="flex flex-col lg:flex-row text-center text-white bg-slate-900 app-container" data-aos="zoom-out-down">
-      <div className="flex-1 p-6 text-gray-800 bg-slate-100 overflow-y-auto text-left">
+    <div className="flex flex-col lg:flex-row text-center text-white bg-slate-900 app-container content" data-aos="zoom-out-down">
+      <div className="flex-1 p-6 text-gray-800 bg-slate-100 overflow-y-auto overflow-x-hidden text-left">
         <h2 className="w-screen flex text-2xl font-bold mb-4 bg-gray-300 text-left p-2"><FaBookOpen className='h-6 w-6 mt-2 mr-2'/>Theory</h2>
         <div>
           <p className="mb-4">
@@ -123,7 +122,14 @@ const MolarityCalculator = () => {
             The formula weight (also known as molecular mass) is the sum of the atomic weights of all atoms in a molecule. It is usually expressed in grams per mole (g/mol).
             <br /><br />
             <strong>Formula:</strong><br />
-            FW = Σ (Atomic Weight of Each Atom × Number of Atoms of that Element)
+            FW = Σ (Atomic Weight of Each Atom × Number of Atoms of that Element).
+            To determine the FW, please use the: 
+              <Link to="/formula" className='bg-black'>
+              <span className="p-2 mt-2 flex rounded-full items-center justify-center text-sm font-semibold bg-green-300">
+                <SiMoleculer className="h-6 w-4 mr-2" />
+                Formula Weight Calculator
+              </span>
+            </Link>
           </p>
           <p className="mb-4">
               To use this app, simply input the FW, required Volume and desired concentration, and the tool will calculate the exact amount needed to prepare the solution.

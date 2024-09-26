@@ -15,27 +15,32 @@ const BeerLambertCalculator = () => {
     const path = parseFloat(pathLength);
     const conc = parseFloat(concentration);
     const abs = parseFloat(absorbance);
+  
     let calculatedValue;
 
-    if (extinctionCoefficient && pathLength && concentration) {
+    if (!absorbance && coeff && path && conc) {
       calculatedValue = coeff * path * conc;
       setAbsorbance(calculatedValue.toFixed(2));
-    } else if (extinctionCoefficient && pathLength && absorbance) {
-      calculatedValue = absorbance / (coeff * path);
-      setConcentration(calculatedValue.toFixed(2));
-    } else if (pathLength && concentration && absorbance) {
-      calculatedValue = absorbance / (extinctionCoefficient * path);
-      setConcentration(calculatedValue.toFixed(2));
-    } else if (extinctionCoefficient && concentration && absorbance) {
-      calculatedValue = absorbance / (extinctionCoefficient * concentration);
+    }
+    else if (!concentration && coeff && path && abs) {
+      calculatedValue = abs / (coeff * path);
+      setConcentration(Number(calculatedValue.toPrecision(10))); 
+    }
+    else if (!pathLength && coeff && conc && abs) {
+      calculatedValue = abs / (coeff * conc);
       setPathLength(calculatedValue.toFixed(2));
-    } else {
+    }
+    else if (!extinctionCoefficient && path && conc && abs) {
+      calculatedValue = abs / (path * conc);
+      setExtinctionCoefficient(Number(calculatedValue.toPrecision(10))); 
+    }
+    else {
       setError('Please enter values for any three of the four parameters.');
       return;
     }
-
+  
     setError('');
-  };
+  };  
 
   const handleClearFields = () => {
     setExtinctionCoefficient('');
@@ -51,27 +56,42 @@ const BeerLambertCalculator = () => {
 
   return (
     <div className="flex flex-col lg:flex-row text-center text-white bg-slate-900 app-container" data-aos="fade-right">
-      <div className="flex-1 p-4 bg-slate-100 text-gray-800 overflow-y-auto text-left">
+      <div className="flex-1 p-4 bg-slate-100 text-gray-800 overflow-y-auto overflow-x-hidden text-left">
         <h2 className="w-screen flex text-2xl font-bold mb-4 bg-gray-300 text-left p-2">
           <FaBeer className="h-6 w-6 mt-2 mr-2" />
           Beer Lambert Law Theory
         </h2>
         <div>
-          <p className="mb-4">
-            <strong>What is the Beer-Lambert Law?</strong></p>
+          <p className="mb-4"><strong>What is the Beer-Lambert Law?</strong></p>
             The Beer-Lambert Law relates the absorbance of light to the properties of the material through which the light is traveling.
             The formula is given by:
-            <br />
-            A = ε * c * l
-            <br />
+            <br /><br />
+            <strong>A = ε * c * l</strong>
+            <br /><br />
             where:
             <ul>
               <li><strong>A</strong> is the absorbance (no units)</li>
               <li><strong>ε</strong> is the extinction coefficient (molar absorptivity) in M<sup>-1</sup>cm<sup>-1</sup></li>
               <li><strong>c</strong> is the concentration in moles per liter (M)</li>
               <li><strong>l</strong> is the path length in centimeters (cm)</li>
-            </ul>
-            <p>You can use this calculator to find any one of these values if the other three are known.</p>
+            </ul>   <br />
+            <p><strong>How to use?</strong></p>
+            <p>You can use this calculator to find any one of these values if the other three are known.
+            Enter the absorbance, concentration, and path length into the calculator to determine the molar 
+            absorptivity constant. This calculator helps in analyzing the results of spectrophotometric 
+            experiments.
+            </p> <br /> <br />
+            <p><strong>Example:</strong></p>
+            <p>
+            Use the following variables:
+              <br />
+              Absorbance (A) = 0.5 (unitless)
+              <br />
+              Concentration (c) = 0.1 M
+              <br />
+              Path Length (l) = 1 cm
+            </p>
+            <p className="mb-4"><strong>The result is ε = 5.</strong></p>
         </div>
       </div>
 

@@ -46,26 +46,33 @@ const GForceCalculator = () => {
 
   return (
     <div className="flex flex-col lg:flex-row text-center text-white bg-slate-900 app-container" data-aos="fade-right">
-      <div className="flex-1 p-4 bg-slate-100 text-gray-800 overflow-y-auto text-left">
+      <div className="flex-1 p-4 bg-slate-100 text-gray-800 overflow-y-auto overflow-x-hidden text-left">
         <h2 className="w-screen flex text-2xl font-bold mb-4 bg-gray-300 text-left p-2">
           <FaCogs className="h-6 w-6 mt-2 mr-2" />
           G Force Theory
         </h2>
         <div>
-          <p className="mb-4"><strong>What is Relative Centrifugal Force (RCF)?</strong></p>
+        <p className="mb-4"><strong>What is Relative Centrifugal Force (RCF)?</strong></p>
+          <p className="mb-4">
+            Relative Centrifugal Force (RCF), often referred to as the "g-force" in the context of centrifugation, quantifies the force exerted on a sample during the spinning process in a centrifuge. This force is crucial for separating components based on their density, allowing for effective sedimentation of particles in solution.
+          </p>
+          <p className="mb-4">
+            The RCF is calculated using the formula:
             <br />
-            Relative Centrifugal Force (RCF) refers to the amount of force applied when using a centrifuge. It is calculated using the formula:
-            <br />
-            <strong>RCF = (RPM)² × 1.118 × 10<sup>-5</sup> × r</strong>
-            <br />
+            <strong>RCF = (RPM)² × 1.118 × 10<sup>-5</sup> × r</strong><br /><br />          
+            </p>
             where:
-            <br />
-            <ul>
-              <li><strong>RPM</strong> is the revolutions per minute of the rotor</li>
-              <li><strong>r</strong> is the radius of the rotor in centimeters</li>
+            <ul><br />
+              <li><strong>RPM</strong> represents the revolutions per minute of the centrifuge rotor, indicating the speed at which the rotor spins.</li><br />
+              <li><strong>r</strong> denotes the radius of the rotor in centimeters, which is the distance from the center of rotation to the sample.</li><br />
             </ul>
-            <p>This calculator can convert between RCF and RPM to assist in achieving more precise experimental results that require centrifugation.</p>
 
+          <p className="mb-4">
+            This calculator facilitates the conversion between RCF and RPM, allowing researchers and laboratory personnel to optimize their centrifugation protocols. By knowing the RCF, one can ensure that samples are subjected to the appropriate forces for effective separation without damaging sensitive biological materials.
+          </p>
+          <p className="mb-4">
+            Understanding RCF is essential for various applications, including cell pelleting, protein precipitation, and nucleic acid purification. By utilizing this tool, users can achieve more precise and reliable experimental outcomes that are critical in research and diagnostic settings.
+          </p>
         </div>
       </div>
 

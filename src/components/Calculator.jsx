@@ -43,7 +43,7 @@ const LabBook = () => {
       }, []);    
 
     return (
-        <div className="labbook p-4 text-gray-800 bg-slate-100 overflow-y-auto text-left mb-4 h-full max-h-[calc(100vh-100px)]" data-aos="fade-right">
+        <div className="labbook p-4 text-gray-800 bg-slate-100 overflow-y-auto overflow-x-hidden text-left mb-4 h-full max-h-[calc(100vh-100px)]" data-aos="fade-right">
             <h2 className="text-2xl font-bold mb-2">Lab Book</h2>
             <div className="text-gray-700 mb-4">
                 <strong>Date:</strong> {dateTime.toLocaleDateString()} <br />
@@ -115,7 +115,7 @@ const Calculator = () => {
     };
 
     return (
-        <div className="calculator mx-auto shadow-xl h-full no-print mt-4" data-aos="fade-right">
+        <div className="calculator mx-auto shadow-xl h-full no-print mt-4">
             <div>
                 <div className="p-4 text-white text-right border border-gray-50 text-3xl bg-gray-900">
                     {cal || 0}
