@@ -1,17 +1,30 @@
 import React, { useState } from 'react';
 import { FaExchangeAlt } from 'react-icons/fa';
-import { IoConstructSharp } from "react-icons/io5";
 
 const UnitConverter = () => {
   const [selectedConversion, setSelectedConversion] = useState('temperature');
   const [tempCelsius, setTempCelsius] = useState('');
   const [tempFahrenheit, setTempFahrenheit] = useState('');
   const [tempKelvin, setTempKelvin] = useState('');
-  
+
   const [lengthMeters, setLengthMeters] = useState('');
   const [lengthCentimeters, setLengthCentimeters] = useState('');
+  const [lengthMillimeters, setLengthMillimeters] = useState('');
+  const [lengthMicrometers, setLengthMicrometers] = useState('');
+  const [lengthNanometers, setLengthNanometers] = useState('');
 
-  // Other states...
+  const [densityKgPerM3, setDensityKgPerM3] = useState('');
+  const [densityGPerCm3, setDensityGPerCm3] = useState('');
+
+  const [weightKg, setWeightKg] = useState('');
+  const [weightGrams, setWeightGrams] = useState('');
+  const [weightMg, setWeightMg] = useState('');
+  const [weightLbs, setWeightLbs] = useState('');
+
+  const [volumeLiters, setVolumeLiters] = useState('');
+  const [volumeMilliliters, setVolumeMilliliters] = useState('');
+  const [volumeCubicMeters, setVolumeCubicMeters] = useState('');
+  const [volumeCubicCentimeters, setVolumeCubicCentimeters] = useState('');
 
   const handleTempConversion = () => {
     const celsius = parseFloat(tempCelsius);
@@ -31,19 +44,81 @@ const UnitConverter = () => {
   };
 
   const handleLengthConversion = () => {
-   
+    const meters = parseFloat(lengthMeters);
+    if (lengthMeters) {
+      setLengthCentimeters(meters * 100);
+      setLengthMillimeters(meters * 1000);
+      setLengthMicrometers(meters * 1e6);
+      setLengthNanometers(meters * 1e9);
+    } else if (lengthCentimeters) {
+      const cm = parseFloat(lengthCentimeters);
+      setLengthMeters(cm / 100);
+      setLengthMillimeters(cm * 10);
+      setLengthMicrometers(cm * 1e4);
+      setLengthNanometers(cm * 1e7);
+    }
   };
 
   const handleDensityConversion = () => {
-    
+    const kgPerM3 = parseFloat(densityKgPerM3);
+    if (densityKgPerM3) {
+      setDensityGPerCm3(kgPerM3 / 1000);
+    } else if (densityGPerCm3) {
+      setDensityKgPerM3(parseFloat(densityGPerCm3) * 1000);
+    }
   };
 
   const handleWeightConversion = () => {
-    
+    const kg = parseFloat(weightKg);
+    if (weightKg) {
+      setWeightGrams(kg * 1000);
+      setWeightMg(kg * 1e6);
+      setWeightLbs(kg * 2.20462);
+    } else if (weightGrams) {
+      const grams = parseFloat(weightGrams);
+      setWeightKg(grams / 1000);
+      setWeightMg(grams * 1000);
+      setWeightLbs(grams / 453.592);
+    }
   };
 
   const handleVolumeConversion = () => {
-    
+    const liters = parseFloat(volumeLiters);
+    if (volumeLiters) {
+      setVolumeMilliliters(liters * 1000);
+      setVolumeCubicMeters(liters / 1000);
+      setVolumeCubicCentimeters(liters * 1000);
+    } else if (volumeMilliliters) {
+      const milliliters = parseFloat(volumeMilliliters);
+      setVolumeLiters(milliliters / 1000);
+      setVolumeCubicCentimeters(milliliters);
+      setVolumeCubicMeters(milliliters / 1e6);
+    }
+  };
+
+  const handleClearFields = () => {
+    setTempCelsius('');
+    setTempFahrenheit('');
+    setTempKelvin('');
+
+    setLengthMeters('');
+    setLengthCentimeters('');
+    setLengthMillimeters('');
+    setLengthMicrometers('');
+    setLengthNanometers('');
+
+    setDensityKgPerM3('');
+    setDensityGPerCm3('');
+
+    setWeightKg('');
+    setWeightGrams('');
+    setWeightMg('');
+    setWeightLbs('');
+
+    setVolumeLiters('');
+    setVolumeMilliliters('');
+    setVolumeCubicMeters('');
+    setVolumeCubicCentimeters('');
   };
 
   const renderTheory = () => {
@@ -51,16 +126,94 @@ const UnitConverter = () => {
       <div>
         <h3>Theory of Unit Conversions</h3>
         <p>Unit conversions are essential in science and engineering to ensure consistency and accuracy in measurements.</p>
+        
         {selectedConversion === 'temperature' && (
-          <p>Temperature can be measured in Celsius, Fahrenheit, and Kelvin.</p>
+          <div>
+            <h4>Temperature Conversion</h4>
+            <p>Temperature is a measure of the thermal energy of a system and can be expressed in three primary units:</p>
+            <ul>
+              <li><strong>Celsius (°C)</strong>: Widely used in most parts of the world. Water freezes at 0°C and boils at 100°C under standard conditions.</li>
+              <li><strong>Fahrenheit (°F)</strong>: Commonly used in the United States. Water freezes at 32°F and boils at 212°F.</li>
+              <li><strong>Kelvin (K)</strong>: Used in scientific contexts, particularly in physics. The Kelvin scale starts at absolute zero, the theoretical point where all molecular motion stops, with 0K equivalent to -273.15°C. Water freezes at 273.15K and boils at 373.15K.</li>
+            </ul>
+            <p>Conversions between these units can be done using the following formulas:</p>
+            <ul>
+              <li>From Celsius to Fahrenheit: \( F = (C \times \frac{9}{5}) + 32 \)</li>
+              <li>From Fahrenheit to Celsius: \( C = (F - 32) \times \frac{5}{9} \)</li>
+              <li>From Celsius to Kelvin: \( K = C + 273.15 \)</li>
+              <li>From Kelvin to Celsius: \( C = K - 273.15 \)</li>
+            </ul>
+          </div>
         )}
+  
         {selectedConversion === 'length' && (
-          <p>Length can be measured in meters, centimeters, inches, and more.</p>
+          <div>
+            <h4>Length Conversion</h4>
+            <p>Length is a measure of distance and can be expressed in various units, depending on the scale of measurement. Common units of length include:</p>
+            <ul>
+              <li><strong>Meters (m)</strong>: The base unit of length in the International System of Units (SI).</li>
+              <li><strong>Centimeters (cm)</strong>: Equal to one-hundredth of a meter (1 m = 100 cm).</li>
+              <li><strong>Millimeters (mm)</strong>: Equal to one-thousandth of a meter (1 m = 1000 mm).</li>
+              <li><strong>Micrometers (µm)</strong>: Equal to one-millionth of a meter (1 m = 1,000,000 µm).</li>
+              <li><strong>Nanometers (nm)</strong>: Equal to one-billionth of a meter (1 m = 1,000,000,000 nm).</li>
+            </ul>
+            <p>Conversions between these units are based on powers of ten:</p>
+            <ul>
+              <li>1 meter = 100 centimeters = 1000 millimeters = 1,000,000 micrometers = 1,000,000,000 nanometers</li>
+            </ul>
+          </div>
         )}
-        <div className='flex flex-row justify-center text-center text-4xl font-bold mt-16 bg-red-300 p-4'>
-        <IoConstructSharp className='h-20 w-20'/>
-        <p className='mt-6 ml-4'>Under construction.</p>
-        </div>
+  
+        {selectedConversion === 'density' && (
+          <div>
+            <h4>Density Conversion</h4>
+            <p>Density is defined as mass per unit volume and is commonly expressed in:</p>
+            <ul>
+              <li><strong>kg/m³</strong>: Kilograms per cubic meter, the SI unit for density.</li>
+              <li><strong>g/cm³</strong>: Grams per cubic centimeter, often used for smaller objects or substances.</li>
+            </ul>
+            <p>To convert between these units, the following relationship is used:</p>
+            <ul>
+              <li>1 g/cm³ = 1000 kg/m³</li>
+            </ul>
+          </div>
+        )}
+  
+        {selectedConversion === 'weight' && (
+          <div>
+            <h4>Weight Conversion</h4>
+            <p>Weight refers to the mass of an object and can be measured in several units:</p>
+            <ul>
+              <li><strong>Kilograms (kg)</strong>: The base unit of mass in the SI system.</li>
+              <li><strong>Grams (g)</strong>: One-thousandth of a kilogram (1 kg = 1000 g).</li>
+              <li><strong>Milligrams (mg)</strong>: One-thousandth of a gram (1 g = 1000 mg).</li>
+              <li><strong>Pounds (lbs)</strong>: A unit commonly used in the United States, where 1 kg ≈ 2.20462 lbs.</li>
+            </ul>
+            <p>Conversions between these units follow the relationships:</p>
+            <ul>
+              <li>1 kilogram = 1000 grams = 1,000,000 milligrams</li>
+              <li>1 kilogram ≈ 2.20462 pounds</li>
+            </ul>
+          </div>
+        )}
+  
+        {selectedConversion === 'volume' && (
+          <div>
+            <h4>Volume Conversion</h4>
+            <p>Volume refers to the amount of space an object or substance occupies and can be measured in different units:</p>
+            <ul>
+              <li><strong>Liters (L)</strong>: A metric unit of volume, commonly used for liquids.</li>
+              <li><strong>Milliliters (mL)</strong>: One-thousandth of a liter (1 L = 1000 mL).</li>
+              <li><strong>Cubic Meters (m³)</strong>: The SI unit for volume, often used for larger volumes (1 m³ = 1000 L).</li>
+              <li><strong>Cubic Centimeters (cm³)</strong>: A metric unit equal to one-thousandth of a liter (1 cm³ = 1 mL).</li>
+            </ul>
+            <p>Common volume conversions include:</p>
+            <ul>
+              <li>1 liter = 1000 milliliters = 1000 cubic centimeters</li>
+              <li>1 cubic meter = 1000 liters</li>
+            </ul>
+          </div>
+        )}
       </div>
     );
   };
@@ -74,10 +227,10 @@ const UnitConverter = () => {
         </h2>
         {renderTheory()}
       </div>
-
+  
       <div className="flex-1 p-6 bg-gray-700 flex flex-col">
-        <h1 className="text-2xl font-bold mb-6">Convert Units</h1>
-
+        <h1 className="text-2xl font-bold mb-1">Convert Units</h1>
+  
         <div className="mb-4">
           <label className="block mb-1 text-left">Select Conversion Type:</label>
           <select
@@ -92,7 +245,7 @@ const UnitConverter = () => {
             <option value="volume">Volume</option>
           </select>
         </div>
-
+  
         {selectedConversion === 'temperature' && (
           <>
             <div className="mb-4">
@@ -124,8 +277,163 @@ const UnitConverter = () => {
             </div>
           </>
         )}
-
-        <div className="flex justify-center">
+  
+        {selectedConversion === 'length' && (
+          <>
+            <div className="mb-1">
+              <label className="block mb-1 text-left">Meters (m):</label>
+              <input
+                type="number"
+                value={lengthMeters}
+                onChange={(e) => setLengthMeters(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+            <div className="mb-1">
+              <label className="block mb-1 text-left">Centimeters (cm):</label>
+              <input
+                type="number"
+                value={lengthCentimeters}
+                onChange={(e) => setLengthCentimeters(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+            <div className="mb-1">
+              <label className="block mb-1 text-left">Millimeters (mm):</label>
+              <input
+                type="number"
+                value={lengthMillimeters}
+                onChange={(e) => setLengthMillimeters(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+            <div className="mb-1">
+              <label className="block mb-1 text-left">Micrometers (µm):</label>
+              <input
+                type="number"
+                value={lengthMicrometers}
+                onChange={(e) => setLengthMicrometers(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+            <div className="mb-1">
+              <label className="block mb-1 text-left">Nanometers (nm):</label>
+              <input
+                type="number"
+                value={lengthNanometers}
+                onChange={(e) => setLengthNanometers(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+          </>
+        )}
+  
+        {selectedConversion === 'density' && (
+          <>
+            <div className="mb-4">
+              <label className="block mb-1 text-left">Density (kg/m³):</label>
+              <input
+                type="number"
+                value={densityKgPerM3}
+                onChange={(e) => setDensityKgPerM3(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-1 text-left">Density (g/cm³):</label>
+              <input
+                type="number"
+                value={densityGPerCm3}
+                onChange={(e) => setDensityGPerCm3(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+          </>
+        )}
+  
+        {selectedConversion === 'weight' && (
+          <>
+            <div className="mb-4">
+              <label className="block mb-1 text-left">Weight (kg):</label>
+              <input
+                type="number"
+                value={weightKg}
+                onChange={(e) => setWeightKg(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-1 text-left">Weight (g):</label>
+              <input
+                type="number"
+                value={weightGrams}
+                onChange={(e) => setWeightGrams(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-1 text-left">Weight (mg):</label>
+              <input
+                type="number"
+                value={weightMg}
+                onChange={(e) => setWeightMg(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-1 text-left">Weight (lbs):</label>
+              <input
+                type="number"
+                value={weightLbs}
+                onChange={(e) => setWeightLbs(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+          </>
+        )}
+  
+        {selectedConversion === 'volume' && (
+          <>
+            <div className="mb-4">
+              <label className="block mb-1 text-left">Volume (liters):</label>
+              <input
+                type="number"
+                value={volumeLiters}
+                onChange={(e) => setVolumeLiters(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-1 text-left">Volume (milliliters):</label>
+              <input
+                type="number"
+                value={volumeMilliliters}
+                onChange={(e) => setVolumeMilliliters(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-1 text-left">Volume (cubic meters):</label>
+              <input
+                type="number"
+                value={volumeCubicMeters}
+                onChange={(e) => setVolumeCubicMeters(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-1 text-left">Volume (cubic centimeters):</label>
+              <input
+                type="number"
+                value={volumeCubicCentimeters}
+                onChange={(e) => setVolumeCubicCentimeters(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+          </>
+        )}
+  
+        <div className="flex justify-center mt-2">
           <button
             type="button"
             onClick={() => {
@@ -153,10 +461,19 @@ const UnitConverter = () => {
           >
             Calculate
           </button>
+          <div className="flex justify-center">
+            <button
+              type="button"
+              onClick={handleClearFields}
+              className="w-[100px] ml-2 px-4 py-2 cursor-pointer mb-2 transition-all duration-200 ease-in-out hover:scale-110 font-semibold bg-violet-300 text-black"
+            >
+              Clear
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
-};
+};  
 
 export default UnitConverter;
