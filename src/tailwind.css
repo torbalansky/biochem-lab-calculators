@@ -132,6 +132,19 @@ html, body {
     height: auto;
     overflow: auto;
   }
+
+  .calculator-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+  }
+
+  .home-icon {
+    height: 30px;
+    width: 30px;
+    margin-right: 40px;
+  }
 }
 
 @supports (-ms-ime-align: auto) {

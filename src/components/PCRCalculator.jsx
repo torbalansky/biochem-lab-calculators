@@ -179,7 +179,7 @@ const PCRCalculator = () => {
           <button
             type="button"
             onClick={calculateTotalVolume}
-            className="w-[100px] px-4 py-2 mb-2 cursor-pointer transition-all duration-200 ease-in-out hover:scale-110 font-semibold bg-blue-300 text-black"
+            className="w-[100px] px-4 py-2 mb-2 cursor-pointer transition-all duration-200 ease-in-out hover:scale-110 font-semibold bg-green-300 text-black"
           >
             Calculate
           </button>
@@ -188,7 +188,7 @@ const PCRCalculator = () => {
             <button
               type="button"
               onClick={handleClearFields}
-              className="w-[100px] ml-2 px-4 py-2 cursor-pointer mb-2 transition-all duration-200 ease-in-out hover:scale-110 font-semibold bg-lime-300 text-black"
+              className="w-[100px] ml-2 px-4 py-2 cursor-pointer mb-2 transition-all duration-200 ease-in-out hover:scale-110 font-semibold bg-violet-300 text-black"
             >
               Clear
             </button>
