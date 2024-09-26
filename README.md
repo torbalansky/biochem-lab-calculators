@@ -19,7 +19,7 @@ This app offers a variety of calculators for lab work, including:
 
 ## Screenshots
 
-![Biochem Lab Calculators Home Page](./screenshots/home-page.png)
+![Biochem Lab Calculators Home Page](./public/home-page.png)
 
 ## Built With
 
