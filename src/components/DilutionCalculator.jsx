@@ -279,12 +279,12 @@ const DilutionCalculator = () => {
 
       <div className="flex-1 p-4 bg-gray-800 overflow-y-auto">
         <h2 className="text-2xl font-bold mb-4">Instructions</h2>
-        <div className="space-y-4 text-lg">
+        <div className="space-y-4 text-md">
           {stockVolume !== null && !errorMessage && (
             <div className="steps">
               <div className="step flex items-center opacity-0 animate-fadeIn mb-4" style={{ animationDelay: '0.2s' }}>
-                <GiThermometerScale className="h-6 w-6 mr-2 text-blue-400" />
-                Measure&nbsp; <strong>{formatNumber(stockVolume.split(' ')[0], 2)} {stockVolume.split(' ')[1]}&nbsp;</strong> of the stock solution.
+                <GiThermometerScale className="h-6 w-6 ml-0 text-blue-400" />
+                Measure&nbsp; <strong>{formatNumber(stockVolume)} {stockVolume}&nbsp;</strong> of the stock solution.
               </div>
               <div className="step flex items-center opacity-0 animate-fadeIn mb-4" style={{ animationDelay: '0.4s' }}>
                 <IoBeakerOutline className="mr-2 text-green-400" />
