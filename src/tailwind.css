@@ -65,6 +65,8 @@ html, body {
 }
 
 .calculator-field {
+  display: flex;
+  justify-content: space-between;
   background-color: #1e293b;
   border: 2px solid #70bbac;
   color: white;

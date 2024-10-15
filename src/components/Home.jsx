@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { TbSquareLetterM, TbRulerMeasure, TbSquareLetterA } from "react-icons/tb";
 import { SiMoleculer, SiGithub, SiLinkedin, SiResearchgate } from "react-icons/si";
-import { GiConcentrationOrb, GiDna2, GiConcentricCrescents, GiChemicalBolt } from "react-icons/gi";
+import { GiConcentrationOrb, GiDna2, GiConcentricCrescents, GiChemicalBolt, GiAntibody } from "react-icons/gi";
+import { TfiPencilAlt } from "react-icons/tfi";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -25,17 +26,17 @@ const CalculatorHomePage = () => {
             Whether you're a scientist, student, or researcher, our tools will help streamline your calculations with precision and ease.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:w-1/2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:w-1/2">
           <Link to="/molarity" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
               <TbSquareLetterM className="h-10 w-10 mr-2 home-icon" />
-              Mass Molarity Calculator
+              Mass Molarity
             </span>
           </Link>
 
           <Link to="/dilution" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
-              <GiConcentrationOrb className="h-8 w-8 mr-2 home-icon" />
+              <GiConcentrationOrb className="h-8 w-8 mr-2 home-icon flex justify-start" />
               Dilute a stock solution
             </span>
           </Link>
@@ -43,35 +44,35 @@ const CalculatorHomePage = () => {
           <Link to="/percent" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
               <GiChemicalBolt className="h-8 w-8 mr-2 home-icon" />
-              Percent Solution Calculator
+              Percent Solution
             </span>
           </Link>
 
           <Link to="/formula" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
               <SiMoleculer className="h-8 w-8 mr-2 home-icon" />
-              Formula Weight Calculator
+              Formula Weight
             </span>
           </Link>
 
           <Link to="/absorbance" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
               <TbSquareLetterA className="h-10 w-10 mr-2 home-icon" />
-              Beer-Lambert Law calculator
+              Beer-Lambert Law
             </span>
           </Link>
 
           <Link to="/rcfrpm" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
               <GiConcentricCrescents className="h-8 w-8 mr-2 home-icon" />
-              RCF to RPM Calculator (g-force)
+              RCF to RPM Calculator
             </span>
           </Link>
 
           <Link to="/PCR" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
               <GiDna2 className="h-8 w-8 mr-2 home-icon" />
-              PCR Master Mix Calculator
+              PCR Master Mix
             </span>
           </Link>
 
@@ -81,16 +82,30 @@ const CalculatorHomePage = () => {
               Unit Conversion tool
             </span>
           </Link>
+
+          <Link to="/antibody" className="calculator-field">
+            <span className="flex items-center justify-center text-md font-semibold">
+              <GiAntibody className="h-8 w-8 mr-2 home-icon" />
+              Antibody Dilution
+            </span>
+          </Link>
+
+          <Link to="/calculator" className="calculator-field">
+            <span className="flex items-center justify-center text-md font-semibold">
+              <TfiPencilAlt className="h-8 w-8 mr-2 home-icon" />
+              LabBook & Calculator
+            </span>
+          </Link>
         </div>
       </div>
 
       <footer className="w-full bg-slate-800 flex flex-col items-center py-4 mt-auto sticky bottom-0 footer">
         <div className="flex space-x-4 mb-2">
           <a href="https://github.com/torbalansky" target="_blank" rel="noopener noreferrer">
-            <SiGithub className="h-6 w-6 text-gray-400 hover:text-white transition-all duration-200" />
+            <SiGithub className="h-6 w-6 mt-1 text-gray-400 hover:text-white transition-all duration-200" />
           </a>
           <a href="https://www.linkedin.com/in/pacostathis/" target="_blank" rel="noopener noreferrer">
-            <SiLinkedin className="h-6 w-6 text-gray-400 hover:text-white transition-all duration-200" />
+            <SiLinkedin className="h-6 w-6 mt-1 text-gray-400 hover:text-white transition-all duration-200" />
           </a>
           <a href="https://www.researchgate.net/profile/Silviya-Stateva" target="_blank" rel="noopener noreferrer">
             <SiResearchgate className="h-6 w-6 text-gray-400 hover:text-white transition-all duration-200" />

@@ -10,6 +10,7 @@ import GForceCalculator from './components/GForceCalculator';
 import UnitConverter from './components/UnitConverter';
 import PCRCalculator from './components/PCRCalculator';
 import Calculator from './components/Calculator';
+import AntibodyCalulator from './components/AntibodyDilution';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/unitConversion" element={<UnitConverter />} />
             <Route path="/pcr" element={<PCRCalculator />} />
             <Route path="/calculator" element={<Calculator />} />
+            <Route path="/antibody" element={<AntibodyCalulator />} />
           </Routes>
         </div>
       </Router>

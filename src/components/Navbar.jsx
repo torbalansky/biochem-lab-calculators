@@ -55,6 +55,7 @@ const Navbar = () => {
     { name: "RCF to RPM Calculator", path: "/rcfrpm" },
     { name: "Unit Conversion", path: "/unitConversion" },
     { name: "PCR Master Mix", path: "/PCR" },
+    { name: "Antibody Dilution Calculator", path: "/antibody" },
     {name: "Lab Book and Calculator", path: "/calculator" },
   ];
 
