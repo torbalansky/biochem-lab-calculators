@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaExchangeAlt } from 'react-icons/fa';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const UnitConverter = () => {
   const [selectedConversion, setSelectedConversion] = useState('temperature');
@@ -121,9 +123,13 @@ const UnitConverter = () => {
     setVolumeCubicCentimeters('');
   };
 
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   const renderTheory = () => {
     return (
-      <div>
+      <div data-aos="fade-right">
         <p><strong>Theory of Unit Conversions</strong></p> <br />
         <p>Unit conversions are essential in science and engineering to ensure consistency and accuracy in measurements.</p>
         
@@ -219,7 +225,7 @@ const UnitConverter = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row text-center text-white bg-slate-900 app-container">
+    <div className="flex flex-col lg:flex-row text-center text-white bg-slate-900 app-container" data-aos="fade-right">
       <div className="flex-1 p-4 bg-slate-100 text-gray-800 overflow-y-auto overflow-x-hidden text-left">
         <h2 className="w-screen flex text-2xl font-bold mb-4 bg-gray-300 text-left p-2">
           <FaExchangeAlt className="h-6 w-6 mt-2 mr-2" />

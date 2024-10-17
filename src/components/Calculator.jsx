@@ -115,7 +115,7 @@ const Calculator = () => {
     };
 
     return (
-        <div className="calculator mx-auto shadow-xl h-full no-print mt-4">
+        <div className="calculator mx-auto shadow-xl h-full no-print mt-4" data-aos="fade-right">
             <div>
                 <div className="p-4 text-white text-right border border-gray-50 text-3xl bg-gray-900">
                     {cal || 0}

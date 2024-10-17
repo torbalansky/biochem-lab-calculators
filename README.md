@@ -16,8 +16,10 @@ This app offers a variety of calculators for lab work, including:
 6. **RCF to RPM Calculator** - Convert between Relative Centrifugal Force (RCF) and Revolutions Per Minute (RPM) for centrifugation.
 7. **PCR Master Mix Calculator** - Compute the required volume of each reagent in a PCR reaction for a given number of reactions.
 8. **Unit Conversion Tool** - Easily convert between different scientific units.
+9. **Antibody Dilution Calculator** - Easily calculate the required volume of antibody stock for Western Blot experiments based on your desired dilution factor and final volume.
+10. **LabBook and Simple Calculator** - A convenient tool for quickly documenting notes and calculations, featuring an integrated calculator for swift, on-the-go computations. Ideal for lab work and record-keeping.
 
-## Screenshots
+## Screenshot
 
 ![Biochem Lab Calculators Home Page](./public/home-page.png)
 
