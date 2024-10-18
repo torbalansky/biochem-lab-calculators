@@ -160,7 +160,7 @@ const PercentCalculator = () => {
       </div>
 
       <div className="flex-1 p-6 bg-gray-800 flex flex-col">
-        <h1 className="text-2xl font-bold mb-2">v/v Dilution Calculator</h1>
+        <h1 className="text-2xl font-bold mb-2">v/v Percent Calculator</h1>
         <form className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center">
             <div className="flex-1">
