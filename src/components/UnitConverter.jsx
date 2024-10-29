@@ -28,6 +28,10 @@ const UnitConverter = () => {
   const [volumeCubicMeters, setVolumeCubicMeters] = useState('');
   const [volumeCubicCentimeters, setVolumeCubicCentimeters] = useState('');
 
+  const [molarity, setMolarity] = useState('');
+  const [moles, setMoles] = useState('');
+  const [volumeInLiters, setVolumeInLiters] = useState('');
+
   const handleTempConversion = () => {
     const celsius = parseFloat(tempCelsius);
     const fahrenheit = parseFloat(tempFahrenheit);
@@ -121,6 +125,25 @@ const UnitConverter = () => {
     setVolumeMilliliters('');
     setVolumeCubicMeters('');
     setVolumeCubicCentimeters('');
+
+    setMolarity('');
+    setMoles('');
+    setVolumeInLiters('');
+
+  };
+
+  const handleMolarityConversion = () => {
+    const m = parseFloat(molarity);
+    const n = parseFloat(moles);
+    const V = parseFloat(volumeInLiters);
+  
+    if (m && V) {
+      setMoles(m * V);
+    } else if (n && V) {
+      setMolarity(n / V);
+    } else if (m && n) {
+      setVolumeInLiters(n / m);
+    }
   };
 
   useEffect(() => {
@@ -220,6 +243,28 @@ const UnitConverter = () => {
             </ul>
           </div>
         )}
+
+        {selectedConversion === 'molarity' && (
+          <div><br />
+            <p><strong>Molarity Conversion</strong></p><br />
+            <p>Molarity (M) is a way to express the concentration of a solution. It is defined as the number of moles of solute per liter of solution:</p><br />
+            <p><strong>Formula:</strong></p>
+            <p><strong>Molarity (M) = Moles of Solute / Volume of Solution (L)</strong></p><br />
+            <p>Where:</p>
+            <ul>
+              <li><strong>Moles of Solute</strong>: The amount of substance present in the solution, measured in moles.</li><br />
+              <li><strong>Volume of Solution</strong>: The total volume of the solution in liters.</li><br />
+            </ul>
+            <p>Common conversions involving molarity include:</p><br />
+            <ul>
+              <li>1 M solution contains 1 mole of solute in 1 liter of solution.</li><br />
+              <li>0.5 M solution contains 0.5 moles of solute in 1 liter of solution.</li><br />
+              <li>To convert from moles to molarity, use the formula: <strong>M = n / V</strong>.</li><br />
+              <li>To convert from molarity to moles, use the formula: <strong>n = M × V</strong>.</li><br />
+              <li>To find the volume from moles and molarity, use the formula: <strong>V = n / M</strong>.</li><br />
+            </ul>
+          </div>
+        )}
       </div>
     );
   };
@@ -249,6 +294,7 @@ const UnitConverter = () => {
             <option value="density">Density</option>
             <option value="weight">Weight</option>
             <option value="volume">Volume</option>
+            <option value="molarity">Molarity</option>
           </select>
         </div>
   
@@ -438,6 +484,39 @@ const UnitConverter = () => {
             </div>
           </>
         )}
+
+          {selectedConversion === 'molarity' && (
+            <>
+              <div className="mb-4">
+                <label className="block mb-1 text-left">Molarity (M):</label>
+                <input
+                  type="number"
+                  value={molarity}
+                  onChange={(e) => setMolarity(e.target.value)}
+                  className="w-full p-2 border text-sm bg-gray-600 rounded"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-1 text-left">Moles (mol):</label>
+                <input
+                  type="number"
+                  value={moles}
+                  onChange={(e) => setMoles(e.target.value)}
+                  className="w-full p-2 border text-sm bg-gray-600 rounded"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-1 text-left">Volume (L):</label>
+                <input
+                  type="number"
+                  value={volumeInLiters}
+                  onChange={(e) => setVolumeInLiters(e.target.value)}
+                  className="w-full p-2 border text-sm bg-gray-600 rounded"
+                />
+              </div>
+            </>
+          )}
+
   
         <div className="flex justify-center mt-2">
           <button
@@ -458,6 +537,9 @@ const UnitConverter = () => {
                   break;
                 case 'volume':
                   handleVolumeConversion();
+                  break;
+                  case 'molarity':
+                  handleMolarityConversion();
                   break;
                 default:
                   break;
