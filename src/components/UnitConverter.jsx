@@ -32,6 +32,34 @@ const UnitConverter = () => {
   const [moles, setMoles] = useState('');
   const [volumeInLiters, setVolumeInLiters] = useState('');
 
+  const [energyJoules, setEnergyJoules] = useState('');
+  const [energyKilojoules, setEnergyKilojoules] = useState('');
+  const [energyGramCalories, setEnergyGramCalories] = useState('');
+  const [energyKilocalories, setEnergyKilocalories] = useState('');
+  const CALORIES_PER_JOULE = 0.239006;
+  const KILOCALORIES_PER_JOULE = 0.000239006;
+
+  const handleEnergyConversion = () => {
+    const joules = parseFloat(energyJoules);
+    const kilojoules = parseFloat(energyKilojoules);
+    const gramCalories = parseFloat(energyGramCalories);
+    const kilocalories = parseFloat(energyKilocalories);
+
+    if (energyJoules) {
+      setEnergyKilojoules(joules / 1000);
+      setEnergyGramCalories(joules * CALORIES_PER_JOULE);
+      setEnergyKilocalories(joules * KILOCALORIES_PER_JOULE);
+    } else if (energyKilojoules) {
+      setEnergyJoules(kilojoules * 1000);
+      setEnergyGramCalories(kilojoules * 1000 * CALORIES_PER_JOULE);
+      setEnergyKilocalories(kilojoules * KILOCALORIES_PER_JOULE);
+    } else if (energyGramCalories) {
+      setEnergyJoules(gramCalories / CALORIES_PER_JOULE);
+      setEnergyKilojoules(gramCalories / CALORIES_PER_JOULE / 1000);
+      setEnergyKilocalories(gramCalories * 0.001);
+    }
+  };
+
   const handleTempConversion = () => {
     const celsius = parseFloat(tempCelsius);
     const fahrenheit = parseFloat(tempFahrenheit);
@@ -129,6 +157,11 @@ const UnitConverter = () => {
     setMolarity('');
     setMoles('');
     setVolumeInLiters('');
+
+    setEnergyJoules('');
+    setEnergyKilojoules('');
+    setEnergyGramCalories('');
+    setEnergyKilocalories('');
 
   };
 
@@ -265,6 +298,23 @@ const UnitConverter = () => {
             </ul>
           </div>
         )}
+
+        {selectedConversion === 'energy' && (
+          <div><br />
+      <p><strong>Energy Conversion</strong></p><br />
+            <p>Common units for energy include:</p>
+            <ul>
+              <li><strong>Joule (J)</strong>: The SI unit of energy. A joule is defined as the work required to move an object one meter against a force of one newton. It is also the energy transferred when one watt of power is applied for one second. Joules measure many forms of energy, including mechanical, thermal, and electrical energy, making them versatile for scientific calculations. 
+              </li><br />
+              <li><strong>Calorie (cal)</strong>: A calorie is the amount of energy needed to raise the temperature of one gram of water by one degree Celsius. This measurement was historically used in thermodynamics and is still widely used in nutrition, where "calories" typically refer to kilocalories (kcal), or the energy needed to heat one kilogram of water by one degree Celsius. 1 calorie is equivalent to approximately 4.184 joules. Calories are a practical unit in fields like chemistry and biology when measuring thermal energy.</li><br />
+            </ul>
+            <p>Energy can be converted between these units:</p>
+            <ul>
+              <li><strong>1 Joule ≈ 0.239 Calories</strong></li>
+              <li><strong>1 Calorie ≈ 4.184 Joules</strong></li>
+            </ul>
+          </div>
+        )}
       </div>
     );
   };
@@ -295,6 +345,7 @@ const UnitConverter = () => {
             <option value="weight">Weight</option>
             <option value="volume">Volume</option>
             <option value="molarity">Molarity</option>
+            <option value="energy">Energy (J, cal)</option>
           </select>
         </div>
   
@@ -517,6 +568,47 @@ const UnitConverter = () => {
             </>
           )}
 
+          {selectedConversion === 'energy' && (
+          <>
+            <div className="mb-4">
+              <label className="block mb-1 text-left">Energy (Joules):</label>
+              <input
+                type="number"
+                value={energyJoules}
+                onChange={(e) => setEnergyJoules(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-1 text-left">Energy (Kilojoules):</label>
+              <input
+                type="number"
+                value={energyKilojoules}
+                onChange={(e) => setEnergyKilojoules(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-1 text-left">Energy (Gram Calories):</label>
+              <input
+                type="number"
+                value={energyGramCalories}
+                onChange={(e) => setEnergyGramCalories(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-1 text-left">Energy (Kilocalories):</label>
+              <input
+                type="number"
+                value={energyKilocalories}
+                onChange={(e) => setEnergyKilocalories(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+          </>
+        )}
+
   
         <div className="flex justify-center mt-2">
           <button
@@ -540,6 +632,8 @@ const UnitConverter = () => {
                   break;
                   case 'molarity':
                   handleMolarityConversion();
+                case 'energy':
+                  handleEnergyConversion();
                   break;
                 default:
                   break;
