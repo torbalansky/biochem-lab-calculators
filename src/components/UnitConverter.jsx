@@ -39,6 +39,29 @@ const UnitConverter = () => {
   const CALORIES_PER_JOULE = 0.239006;
   const KILOCALORIES_PER_JOULE = 0.000239006;
 
+  const [wattMilliWattHours, setWattMilliWattHours] = useState('');
+  const [wattWattHours, setWattWattHours] = useState('');
+  const [wattKilowattHours, setWattKilowattHours] = useState('');
+  const KWATTS_PER_WATT = 0.001;
+  const MILLIWATTS_PER_WATT = 1000;
+ 
+  const handleWattConversion = () => {
+    const wattHours = parseFloat(wattWattHours);
+    const kilowattHours = parseFloat(wattKilowattHours);
+    const milliWattHours = parseFloat(wattMilliWattHours);
+  
+    if (!isNaN(wattHours)) {
+      setWattKilowattHours((wattHours * KWATTS_PER_WATT).toFixed(4).replace(/\.?0+$/, ''));
+      setWattMilliWattHours((wattHours * MILLIWATTS_PER_WATT).toFixed(4).replace(/\.?0+$/, ''));
+    } else if (!isNaN(kilowattHours)) {
+      setWattWattHours((kilowattHours / KWATTS_PER_WATT).toFixed(4).replace(/\.?0+$/, ''));
+      setWattMilliWattHours((kilowattHours / KWATTS_PER_WATT * MILLIWATTS_PER_WATT).toFixed(4).replace(/\.?0+$/, ''));
+    } else if (!isNaN(milliWattHours)) {
+      setWattWattHours((milliWattHours / MILLIWATTS_PER_WATT).toFixed(4).replace(/\.?0+$/, ''));
+      setWattKilowattHours((milliWattHours / MILLIWATTS_PER_WATT * KWATTS_PER_WATT).toFixed(4).replace(/\.?0+$/, ''));
+    }
+  };
+
   const handleEnergyConversion = () => {
     const joules = parseFloat(energyJoules);
     const kilojoules = parseFloat(energyKilojoules);
@@ -163,6 +186,9 @@ const UnitConverter = () => {
     setEnergyGramCalories('');
     setEnergyKilocalories('');
 
+    setWattMilliWattHours('');
+    setWattWattHours('');
+    setWattKilowattHours('');
   };
 
   const handleMolarityConversion = () => {
@@ -301,7 +327,7 @@ const UnitConverter = () => {
 
         {selectedConversion === 'energy' && (
           <div><br />
-      <p><strong>Energy Conversion</strong></p><br />
+          <p><strong>Energy Conversion</strong></p><br />
             <p>Common units for energy include:</p>
             <ul>
               <li><strong>Joule (J)</strong>: The SI unit of energy. A joule is defined as the work required to move an object one meter against a force of one newton. It is also the energy transferred when one watt of power is applied for one second. Joules measure many forms of energy, including mechanical, thermal, and electrical energy, making them versatile for scientific calculations. 
@@ -312,6 +338,25 @@ const UnitConverter = () => {
             <ul>
               <li><strong>1 Joule ≈ 0.239 Calories</strong></li>
               <li><strong>1 Calorie ≈ 4.184 Joules</strong></li>
+            </ul>
+          </div>
+        )}
+
+        {selectedConversion === 'watt' && (
+          <div><br />
+            <p><strong>Energy Conversion</strong></p><br />
+            <p>Common units for energy include:</p>
+            <ul>
+              <li><strong>Watt-hour (Wh)</strong>: A watt-hour is the amount of energy consumed or produced when a power of one watt is applied for one hour. It is commonly used to measure electricity consumption, where household appliances and electric bills often refer to energy usage in kilowatt-hours (kWh), or 1,000 watt-hours. One watt-hour is equivalent to 3,600 joules, as 1 watt equals 1 joule per second.</li><br />
+              
+              <li><strong>Kilowatt-hour (kWh)</strong>: This is a larger unit of energy, commonly used in household electricity consumption and power generation. One kilowatt-hour is the amount of energy used when a device consumes 1,000 watts (1 kW) over one hour. It is equal to 1,000 watt-hours or 3.6 million joules, and it is the standard measurement on most electric utility bills.</li><br />
+
+            </ul>
+            <p>Energy can be converted between these units:</p>
+            <ul>
+              <li><strong>1 Watt-hour ≈ 3,600 Joules</strong></li>
+              <li><strong>1 Kilowatt-hour = 1,000 Watt-hours = 3.6 million Joules</strong></li>
+              <li><strong>1 Watt-hour ≈ 2.247 × 10²² Electron Volts</strong></li>
             </ul>
           </div>
         )}
@@ -346,6 +391,7 @@ const UnitConverter = () => {
             <option value="volume">Volume</option>
             <option value="molarity">Molarity</option>
             <option value="energy">Energy (J, cal)</option>
+            <option value="watt">Power (watt)</option>
           </select>
         </div>
   
@@ -571,7 +617,7 @@ const UnitConverter = () => {
           {selectedConversion === 'energy' && (
           <>
             <div className="mb-4">
-              <label className="block mb-1 text-left">Energy (Joules):</label>
+              <label className="block mb-1 text-left">Joules:</label>
               <input
                 type="number"
                 value={energyJoules}
@@ -580,7 +626,7 @@ const UnitConverter = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block mb-1 text-left">Energy (Kilojoules):</label>
+              <label className="block mb-1 text-left">Kilojoules:</label>
               <input
                 type="number"
                 value={energyKilojoules}
@@ -589,7 +635,7 @@ const UnitConverter = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block mb-1 text-left">Energy (Gram Calories):</label>
+              <label className="block mb-1 text-left">Gram Calories:</label>
               <input
                 type="number"
                 value={energyGramCalories}
@@ -598,7 +644,7 @@ const UnitConverter = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block mb-1 text-left">Energy (Kilocalories):</label>
+              <label className="block mb-1 text-left">Kilocalories:</label>
               <input
                 type="number"
                 value={energyKilocalories}
@@ -606,10 +652,41 @@ const UnitConverter = () => {
                 className="w-full p-2 border text-sm bg-gray-600 rounded"
               />
             </div>
-          </>
-        )}
+            </>
+          )}
 
-  
+            {selectedConversion === 'watt' && (
+              <>
+              <div className="mb-4">
+                <label className="block mb-1 text-left">Milliwatt (mWh):</label>
+                <input
+                  type="number"
+                  value={wattMilliWattHours}
+                  onChange={(e) => setWattMilliWattHours(e.target.value)}
+                  className="w-full p-2 border text-sm bg-gray-600 rounded"
+                />
+              </div>
+                <div className="mb-4">
+                  <label className="block mb-1 text-left">Watts (W):</label>
+                  <input
+                    type="number"
+                    value={wattWattHours}
+                    onChange={(e) => setWattWattHours(e.target.value)}
+                    className="w-full p-2 border text-sm bg-gray-600 rounded"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block mb-1 text-left">Kilowatts (kW):</label>
+                  <input
+                    type="number"
+                    value={wattKilowattHours}
+                    onChange={(e) => setWattKilowattHours(e.target.value)}
+                    className="w-full p-2 border text-sm bg-gray-600 rounded"
+                  />
+                </div>
+              </>
+            )}
+
         <div className="flex justify-center mt-2">
           <button
             type="button"
@@ -632,8 +709,12 @@ const UnitConverter = () => {
                   break;
                   case 'molarity':
                   handleMolarityConversion();
+                  break;
                 case 'energy':
                   handleEnergyConversion();
+                  break;
+                case 'watt':
+                  handleWattConversion();
                   break;
                 default:
                   break;
