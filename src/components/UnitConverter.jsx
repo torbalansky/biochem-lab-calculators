@@ -44,7 +44,37 @@ const UnitConverter = () => {
   const [wattKilowattHours, setWattKilowattHours] = useState('');
   const KWATTS_PER_WATT = 0.001;
   const MILLIWATTS_PER_WATT = 1000;
- 
+
+  const [amps, setAmps] = useState('');
+  const [ohms, setOhms] = useState('');
+  const [watts, setWatts] = useState('');
+  const [volts, setVolts] = useState('');
+  const [calculationType, setCalculationType] = useState('ohms');
+
+  const handleCalculateVolts = () => {
+    const ampsValue = parseFloat(amps);
+    let calculatedVolts;
+
+    if (calculationType === 'ohms') {
+      const ohmsValue = parseFloat(ohms);
+      if (!isNaN(ampsValue) && !isNaN(ohmsValue)) {
+        calculatedVolts = ampsValue * ohmsValue;
+      }
+    } else if (calculationType === 'watts') {
+      const wattsValue = parseFloat(watts);
+      if (!isNaN(ampsValue) && !isNaN(wattsValue) && ampsValue !== 0) {
+        calculatedVolts = wattsValue / ampsValue;
+      } else if (ampsValue === 0) {
+        alert("Current (Amps) cannot be zero when calculating volts using Watts.");
+        return;
+      }
+    }
+
+    if (calculatedVolts !== undefined) {
+      setVolts(calculatedVolts.toFixed(4).replace(/\.?0+$/, ''));
+    }
+  };
+
   const handleWattConversion = () => {
     const wattHours = parseFloat(wattWattHours);
     const kilowattHours = parseFloat(wattKilowattHours);
@@ -66,7 +96,6 @@ const UnitConverter = () => {
     const joules = parseFloat(energyJoules);
     const kilojoules = parseFloat(energyKilojoules);
     const gramCalories = parseFloat(energyGramCalories);
-    const kilocalories = parseFloat(energyKilocalories);
 
     if (energyJoules) {
       setEnergyKilojoules(joules / 1000);
@@ -189,6 +218,11 @@ const UnitConverter = () => {
     setWattMilliWattHours('');
     setWattWattHours('');
     setWattKilowattHours('');
+
+    setAmps('');
+    setVolts('');
+    setOhms('');
+    setWatts('');
   };
 
   const handleMolarityConversion = () => {
@@ -360,6 +394,25 @@ const UnitConverter = () => {
             </ul>
           </div>
         )}
+
+        {selectedConversion === 'ampsToVolts' && (
+        <div><br />
+          <p><strong>Amps to Volts Conversion</strong></p><br />
+          <p>The conversion from Amps (A) to Volts (V) can be done using two primary formulas, depending on whether you know the resistance (in ohms) or the power (in watts):</p><br />
+          <ul>
+            <li>
+              <strong>Using Ohm’s Law:</strong> 
+              <p>The voltage (V) is equal to the current (I) in amps multiplied by the resistance (R) in ohms.</p>
+              <p>This formula is derived from Ohm's Law, which states that the voltage across a conductor is directly proportional to the current flowing through it, given a constant resistance.</p><br />
+            </li>
+            <li>
+              <strong>Using Power:</strong> 
+              <p>The voltage (V) can also be calculated if the power (P) in watts and the current (I) in amps are known.</p>
+              <p>This formula is derived from the relationship between power, current, and voltage, where power is the product of voltage and current.</p><br />
+            </li>
+          </ul>
+        </div>
+        )}
       </div>
     );
   };
@@ -392,6 +445,7 @@ const UnitConverter = () => {
             <option value="molarity">Molarity</option>
             <option value="energy">Energy (J, cal)</option>
             <option value="watt">Power (watt)</option>
+            <option value="ampsToVolts">Amps to Volts</option>
           </select>
         </div>
   
@@ -687,6 +741,65 @@ const UnitConverter = () => {
               </>
             )}
 
+
+        {selectedConversion === 'ampsToVolts' && (
+          <>
+              <div className="mb-4">
+              <label className="mb-1 mr-2 text-start">Select Type:</label>
+              <select
+                value={calculationType}
+                onChange={(e) => setCalculationType(e.target.value)}
+                className="w-60 p-2 border text-sm bg-cyan-800 rounded"
+              >
+                <option value="ohms">Using Ohms (Ω)</option>
+                <option value="watts">Using Watts (W)</option>
+              </select>
+            </div>
+
+            <div className="mb-4">
+              <label className="block mb-1 text-left">Amps (A):</label>
+              <input
+                type="number"
+                value={amps}
+                onChange={(e) => setAmps(e.target.value)}
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+
+            {calculationType === 'ohms' ? (
+              <div className="mb-4">
+                <label className="block mb-1 text-left">Ohms (Ω):</label>
+                <input
+                  type="number"
+                  value={ohms}
+                  onChange={(e) => setOhms(e.target.value)}
+                  className="w-full p-2 border text-sm bg-gray-600 rounded"
+                />
+              </div>
+            ) : (
+              <div className="mb-4">
+                <label className="block mb-1 text-left">Watts (W):</label>
+                <input
+                  type="number"
+                  value={watts}
+                  onChange={(e) => setWatts(e.target.value)}
+                  className="w-full p-2 border text-sm bg-gray-600 rounded"
+                />
+              </div>
+            )}
+
+            <div className="mb-4">
+              <label className="block mb-1 text-left">Volts (V):</label>
+              <input
+                type="text"
+                value={volts}
+                readOnly
+                className="w-full p-2 border text-sm bg-gray-600 rounded"
+              />
+            </div>
+          </>
+        )}
+
         <div className="flex justify-center mt-2">
           <button
             type="button"
@@ -715,6 +828,9 @@ const UnitConverter = () => {
                   break;
                 case 'watt':
                   handleWattConversion();
+                  break;
+                case 'ampsToVolts':
+                  handleCalculateVolts();
                   break;
                 default:
                   break;
