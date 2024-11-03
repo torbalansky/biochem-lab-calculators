@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { TbSquareLetterM, TbRulerMeasure, TbSquareLetterA } from "react-icons/tb";
-import { SiMoleculer, SiGithub, SiLinkedin, SiResearchgate } from "react-icons/si";
+import { SiMoleculer, SiGithub, SiLinkedin, SiResearchgate, SiDwavesystems } from "react-icons/si";
 import { GiConcentrationOrb, GiDna2, GiConcentricCrescents, GiChemicalBolt, GiAntibody } from "react-icons/gi";
-import { TfiPencilAlt } from "react-icons/tfi";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -90,10 +89,10 @@ const CalculatorHomePage = () => {
             </span>
           </Link>
 
-          <Link to="/calculator" className="calculator-field">
+          <Link to="/protein280" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
-              <TfiPencilAlt className="h-8 w-8 mr-2 home-icon" />
-              LabBook & Calculator
+              <SiDwavesystems  className="h-8 w-8 mr-2 home-icon" />
+              Protein Concentration
             </span>
           </Link>
         </div>

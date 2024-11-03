@@ -11,6 +11,7 @@ import UnitConverter from './components/UnitConverter';
 import PCRCalculator from './components/PCRCalculator';
 import Calculator from './components/Calculator';
 import AntibodyCalulator from './components/AntibodyDilution';
+import ProteinAbs280Calculator from './components/ProteinAbs280Calculator';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/pcr" element={<PCRCalculator />} />
             <Route path="/calculator" element={<Calculator />} />
             <Route path="/antibody" element={<AntibodyCalulator />} />
+            <Route path="/protein280" element={< ProteinAbs280Calculator />} />
           </Routes>
         </div>
       </Router>

@@ -56,6 +56,7 @@ const Navbar = () => {
     { name: "Unit Conversion", path: "/unitConversion" },
     { name: "PCR Master Mix", path: "/PCR" },
     { name: "Antibody Dilution Calculator", path: "/antibody" },
+    { name: "Protein Concentration Calculator", path: "/aprotein280" },
     {name: "Lab Book and Calculator", path: "/calculator" },
   ];
 
