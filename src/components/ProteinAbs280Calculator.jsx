@@ -14,6 +14,56 @@ const ProteinAbs280Calculator = () => {
   const [error, setError] = useState('');
   const [customMolWeight, setCustomMolWeight] = useState(null);
   const [customExtCoeff, setCustomExtCoeff] = useState(null);
+  const [pI, setPI] = useState(null);
+
+  const pKaValues = {
+    N_term: 9.6,
+    C_term: 2.1,
+    R: 12.5,
+    H: 6.0,
+    K: 10.5,
+    D: 3.9,
+    E: 4.1,
+    C: 8.3,
+    Y: 10.1
+  };
+
+  const calculateNetCharge = (sequence, pH) => {
+    let charge = 0;
+
+    charge += Math.pow(10, pKaValues.N_term) / (Math.pow(10, pKaValues.N_term) + Math.pow(10, pH));
+    charge -= Math.pow(10, pH) / (Math.pow(10, pKaValues.C_term) + Math.pow(10, pH));
+
+    for (let aa of sequence) {
+      if (aa === 'R') charge += Math.pow(10, pKaValues.R) / (Math.pow(10, pKaValues.R) + Math.pow(10, pH));
+      if (aa === 'H') charge += Math.pow(10, pKaValues.H) / (Math.pow(10, pKaValues.H) + Math.pow(10, pH));
+      if (aa === 'K') charge += Math.pow(10, pKaValues.K) / (Math.pow(10, pKaValues.K) + Math.pow(10, pH));
+      if (aa === 'D') charge -= Math.pow(10, pH) / (Math.pow(10, pKaValues.D) + Math.pow(10, pH));
+      if (aa === 'E') charge -= Math.pow(10, pH) / (Math.pow(10, pKaValues.E) + Math.pow(10, pH));
+      if (aa === 'C') charge -= Math.pow(10, pH) / (Math.pow(10, pKaValues.C) + Math.pow(10, pH));
+      if (aa === 'Y') charge -= Math.pow(10, pH) / (Math.pow(10, pKaValues.Y) + Math.pow(10, pH));
+    }
+
+    return charge;
+  };
+
+  const calculatePI = (sequence) => {
+    let pH = 7.0;
+    let increment = 0.1;
+    let charge = calculateNetCharge(sequence, pH);
+
+    while (Math.abs(charge) > 0.01 && increment > 0.0001) {
+      if (charge > 0) pH += increment;
+      else pH -= increment;
+      charge = calculateNetCharge(sequence, pH);
+
+      if ((charge > 0 && calculateNetCharge(sequence, pH + increment) < 0) || (charge < 0 && calculateNetCharge(sequence, pH - increment) > 0)) {
+        increment /= 2;
+      }
+    }
+
+    setPI(pH.toFixed(2));
+  };
 
 
   const proteinPresets = {
@@ -45,6 +95,8 @@ const ProteinAbs280Calculator = () => {
     const cystineCount = (sequence.match(/C/g) || []).length;
     const extCoeff = (tyrosineCount * 1490) + (tryptophanCount * 5500) + (cystineCount * 125);
     setCustomExtCoeff(extCoeff.toFixed(0));
+
+    calculatePI(sequence);
   };
 
 
@@ -199,7 +251,7 @@ const ProteinAbs280Calculator = () => {
             </div>
 
             <div className="mb-1">
-              <label className="block mb-1 text-left text-sm">Enter Amino Acid Sequence:</label>
+              <label className="block mb-1 text-left text-sm">Amino Acid Sequence:</label>
               <input 
                 type="text" 
                 value={customSequence} 
@@ -214,9 +266,10 @@ const ProteinAbs280Calculator = () => {
             </div>
 
             {customMolWeight && customExtCoeff && (
-              <div className="text-left text-xs mb-4 p-2 bg-gray-600 rounded">
+              <div className="text-left text-xs mb-1 p-1 bg-gray-600 rounded">
                 <p><strong>Molecular Weight:</strong> {customMolWeight} kDa</p>
                 <p><strong>Extinction Coefficient:</strong> {customExtCoeff} M<sup>-1</sup> cm<sup>-1</sup></p>
+                {pI && <p><strong>Isoelectric Point (pI):</strong> {pI}</p>}
               </div>
             )}
           </>
