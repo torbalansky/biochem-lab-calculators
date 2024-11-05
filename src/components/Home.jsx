@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { TbSquareLetterM, TbRulerMeasure, TbSquareLetterA } from "react-icons/tb";
+import { TbSquareLetterM, TbRulerMeasure, TbSquareLetterA, TbChartHistogram } from "react-icons/tb";
 import { SiMoleculer, SiGithub, SiLinkedin, SiResearchgate, SiDwavesystems } from "react-icons/si";
 import { GiConcentrationOrb, GiDna2, GiConcentricCrescents, GiChemicalBolt, GiAntibody } from "react-icons/gi";
 import { GoGraph } from "react-icons/go";
 import { TfiPencilAlt } from "react-icons/tfi";
+import { LiaKeycdn } from "react-icons/lia";
+import { PiChartScatter } from "react-icons/pi";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -22,6 +24,9 @@ const CalculatorHomePage = () => {
           </h1>
           <p className="text-base md:text-xl mb-4">
             Explore a wide range of scientific calculators to assist with your research and experiments. Choose from mass molarity, dilution, formula weight calculations, and more.
+          </p>
+          <p className="text-lg md:text-xl">
+            Whether you're a scientist, student, or researcher, our tools will help streamline your calculations with precision and ease.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-4 lg:w-fit lg:h-2/3">
@@ -106,6 +111,27 @@ const CalculatorHomePage = () => {
             <span className="flex items-center justify-center text-md font-semibold">
               <TfiPencilAlt className="h-8 w-8 mr-2 home-icon" />
               LabBook
+            </span>
+          </Link>
+
+          <Link to="/enzyme" className="calculator-field">
+            <span className="flex items-center justify-center text-md font-semibold">
+              <LiaKeycdn className="h-8 w-8 mr-2 home-icon" />
+              Enzyme Activity
+            </span>
+          </Link>
+
+          <Link to="/michaelismenten" className="calculator-field">
+            <span className="flex items-center justify-center text-md font-semibold">
+              <TbChartHistogram className="h-8 w-8 mr-2 home-icon" />
+              Reaction Rate
+            </span>
+          </Link>
+
+          <Link to="/calibration" className="calculator-field">
+            <span className="flex items-center justify-center text-md font-semibold">
+              <PiChartScatter className="h-8 w-8 mr-2 home-icon" />
+              CalibrationCurve
             </span>
           </Link>
         </div>

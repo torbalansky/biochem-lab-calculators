@@ -13,6 +13,9 @@ import Calculator from './components/Calculator';
 import AntibodyCalulator from './components/AntibodyDilution';
 import ProteinAbs280Calculator from './components/ProteinAbs280Calculator';
 import KdCalculator from './components/kdcalculator';
+import EnzymeCalculator from './components/EnzymeCalculator';
+import MichaelisMentenCalculator from './components/MichaelisMenten';
+import CalibrationCurveCalculator from './components/CalibrationCurveCalculator';
 
 function App() {
   return (
@@ -34,6 +37,9 @@ function App() {
             <Route path="/antibody" element={<AntibodyCalulator />} />
             <Route path="/protein280" element={< ProteinAbs280Calculator />} />
             <Route path="kdcalculator" element={<KdCalculator />} />
+            <Route path="enzyme" element={<EnzymeCalculator />} />
+            <Route path="michaelismenten" element={<MichaelisMentenCalculator />} />
+            <Route path="calibration" element={<CalibrationCurveCalculator />} />
           </Routes>
         </div>
       </Router>

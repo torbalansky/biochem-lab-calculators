@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BiMessageRoundedError } from "react-icons/bi";
-import { FaBookOpen, FaWeight } from "react-icons/fa";
+import { FaBookOpen } from "react-icons/fa";
 import { SiMoleculer } from "react-icons/si";
 import { GiConcentricCrescents, GiThermometerScale  } from "react-icons/gi";
 import { IoBeakerOutline, IoBeaker } from "react-icons/io5";

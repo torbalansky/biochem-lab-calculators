@@ -141,7 +141,7 @@ const ProteinAbs280Calculator = () => {
         const conc = (abs * df * molWeight) / (extCoeff * pl);
         setConcentration(conc.toFixed(4));
     } else {
-        setError('Please ensure all inputs are valid and sequence has been loaded for custom proteins.');
+        setError('Please ensure all inputs are valid and sequence has been loaded.');
     }
   };
 
