@@ -12,6 +12,7 @@ import PCRCalculator from './components/PCRCalculator';
 import Calculator from './components/Calculator';
 import AntibodyCalulator from './components/AntibodyDilution';
 import ProteinAbs280Calculator from './components/ProteinAbs280Calculator';
+import KdCalculator from './components/kdcalculator';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/calculator" element={<Calculator />} />
             <Route path="/antibody" element={<AntibodyCalulator />} />
             <Route path="/protein280" element={< ProteinAbs280Calculator />} />
+            <Route path="kdcalculator" element={<KdCalculator />} />
           </Routes>
         </div>
       </Router>

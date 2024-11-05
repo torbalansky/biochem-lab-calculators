@@ -180,15 +180,13 @@ const ProteinAbs280Calculator = () => {
         <p className="mb-2 font-mono text-sm bg-gray-100 p-2 rounded">
         A = ε × C × l
         </p>
-        <p className="mb-2">
-        where:
+        <p className="mb-2">Where:</p>
         <ul className="list-disc ml-5">
             <li><strong>A:</strong> Absorbance at 280 nm (unitless)</li>
             <li><strong>ε:</strong> Molar extinction coefficient of the protein (M⁻¹ cm⁻¹)</li>
             <li><strong>C:</strong> Concentration of the protein in solution (M)</li>
             <li><strong>l:</strong> Path length of the cuvette or container (cm)</li>
         </ul>
-        </p>
 
         <h3 className="text-xl font-semibold mb-2">Practical Application</h3>
         <p className="mb-2">

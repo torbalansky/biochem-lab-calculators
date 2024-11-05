@@ -57,7 +57,8 @@ const Navbar = () => {
     { name: "PCR Master Mix", path: "/PCR" },
     { name: "Antibody Dilution Calculator", path: "/antibody" },
     { name: "Protein Concentration Calculator", path: "/protein280" },
-    {name: "Lab Book and Calculator", path: "/calculator" },
+    { name: "Lab Book and Calculator", path: "/calculator" },
+    { name: "Calculate Kd", path: "/kdcalculator"}
   ];
 
   const isActive = (path) => {
@@ -77,7 +78,7 @@ const Navbar = () => {
   return (
     <nav className="p-4 text-neonBlue bg-slate-900 flex justify-between items-center font-sans top-0 z-50 sticky tablet-content">
       <div className="container flex justify-between items-center w-full">
-        <button className='flex items-center gap-2 font-semibold text-3xl' onClick={() => handleNavigation('/')} data-aos="fade-right">
+        <button className='flex items-center gap-1 font-semibold text-3xl' onClick={() => handleNavigation('/')} data-aos="fade-right">
           <TbSquareLetterB className="rotate-360 cursor-pointer" />
           <TbSquareLetterI className="rotate-360 cursor-pointer" />
           <TbAtom2 className="rotate-360 cursor-pointer text-white" />

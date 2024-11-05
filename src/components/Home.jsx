@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { TbSquareLetterM, TbRulerMeasure, TbSquareLetterA } from "react-icons/tb";
 import { SiMoleculer, SiGithub, SiLinkedin, SiResearchgate, SiDwavesystems } from "react-icons/si";
 import { GiConcentrationOrb, GiDna2, GiConcentricCrescents, GiChemicalBolt, GiAntibody } from "react-icons/gi";
+import { GoGraph } from "react-icons/go";
+import { TfiPencilAlt } from "react-icons/tfi";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -14,21 +16,18 @@ const CalculatorHomePage = () => {
   return (
     <div className="min-h-screen flex flex-col justify-between items-center bg-slate-900 text-white font-sans home-content" data-aos="zoom-in-up">
       <div className="w-11/12 max-w-screen-lg mt-8 mb-12 flex flex-col lg:flex-row lg:justify-between gap-12 home-content">
-        <div className="lg:w-1/2 flex flex-col items-start lg:items-start text-center lg:text-left mt-4">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+        <div className="lg:w-1/3 flex flex-col items-start lg:items-start text-center lg:text-left mt-4">
+          <h1 className="text-xl md:text-3xl font-bold mb-4">
             Welcome to the Scientific Calculators Hub
           </h1>
-          <p className="text-lg md:text-xl mb-4">
+          <p className="text-base md:text-xl mb-4">
             Explore a wide range of scientific calculators to assist with your research and experiments. Choose from mass molarity, dilution, formula weight calculations, and more.
           </p>
-          <p className="text-lg md:text-xl">
-            Whether you're a scientist, student, or researcher, our tools will help streamline your calculations with precision and ease.
-          </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:w-1/2">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-4 lg:w-fit lg:h-2/3">
           <Link to="/molarity" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
-              <TbSquareLetterM className="h-10 w-10 mr-2 home-icon" />
+              <TbSquareLetterM className="h-8 w-8 mr-2 home-icon" />
               Mass Molarity
             </span>
           </Link>
@@ -36,7 +35,7 @@ const CalculatorHomePage = () => {
           <Link to="/dilution" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
               <GiConcentrationOrb className="h-8 w-8 mr-2 home-icon flex justify-start" />
-              Dilute a stock solution
+              Dilute solution
             </span>
           </Link>
 
@@ -56,15 +55,15 @@ const CalculatorHomePage = () => {
 
           <Link to="/absorbance" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
-              <TbSquareLetterA className="h-10 w-10 mr-2 home-icon" />
-              Beer-Lambert Law
+              <TbSquareLetterA className="h-8 w-8 mr-2 home-icon" />
+              Beer-Lambert
             </span>
           </Link>
 
           <Link to="/rcfrpm" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
               <GiConcentricCrescents className="h-8 w-8 mr-2 home-icon" />
-              RCF to RPM Calculator
+              RCF to RPM
             </span>
           </Link>
 
@@ -78,7 +77,7 @@ const CalculatorHomePage = () => {
           <Link to="/unitConversion" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
               <TbRulerMeasure className="h-8 w-8 mr-2 home-icon" />
-              Unit Conversion tool
+              Unit Conversion
             </span>
           </Link>
 
@@ -92,7 +91,21 @@ const CalculatorHomePage = () => {
           <Link to="/protein280" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
               <SiDwavesystems  className="h-8 w-8 mr-2 home-icon" />
-              Protein Concentration
+              ProteinQuant
+            </span>
+          </Link>
+
+          <Link to="/kdcalculator" className="calculator-field">
+            <span className="flex items-center justify-center text-md font-semibold">
+              <GoGraph className="h-8 w-8 mr-2 home-icon" />
+              Kd Calculator
+            </span>
+          </Link>
+
+          <Link to="/calculator" className="calculator-field">
+            <span className="flex items-center justify-center text-md font-semibold">
+              <TfiPencilAlt className="h-8 w-8 mr-2 home-icon" />
+              LabBook
             </span>
           </Link>
         </div>
