@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { create, all } from 'mathjs';
 
 const LabBook = () => {
     const [protocolName, setProtocolName] = useState('');
@@ -93,6 +94,8 @@ const LabBook = () => {
     );
 };
 
+const math = create(all);
+
 const Calculator = () => {
     const [cal, setCal] = useState('');
     const [result, setResult] = useState('');
@@ -108,8 +111,8 @@ const Calculator = () => {
 
     const results = () => {
         try {
-            setResult(eval(cal).toString());
-        } catch {
+            setResult(math.evaluate(cal).toString());
+        } catch (error) {
             setResult('Error');
         }
     };

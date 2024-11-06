@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaBookOpen } from "react-icons/fa";
 import { BiMessageRoundedError } from "react-icons/bi";
 import StndrdCurvePlotImage from '../assets/img/stndcurve.png';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const CalibrationCurveCalculator = () => {
   const [slope, setSlope] = useState('');
@@ -21,7 +23,7 @@ const CalibrationCurveCalculator = () => {
     const interceptValue = parseFloat(intercept);
     const signalValue = parseFloat(signal);
     const concentration = (signalValue - interceptValue) / slopeValue;
-    setUnknownConcentration(concentration.toFixed(3).replace(/(\.[0-9]*[1-9])0+$/, '$1').replace(/(\.0+|(?<=\.\d+)0+)$/, '')); // Keep 3 decimal places
+    setUnknownConcentration(concentration.toFixed(3).replace(/(\.[0-9]*[1-9])0+$/, '$1').replace(/(\.0+|(?<=\.\d+)0+)$/, ''));
   };
 
   const handleClearFields = () => {
@@ -32,8 +34,12 @@ const CalibrationCurveCalculator = () => {
     setErrorMessage('');
   };
 
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
-    <div className="flex flex-col lg:flex-row text-center text-white bg-slate-900 app-container font-sans">
+    <div className="flex flex-col lg:flex-row text-center text-white bg-slate-900 app-container font-sans" data-aos="zoom-out-down">
       <div className="flex-1 p-4 bg-slate-100 text-gray-800 overflow-y-auto overflow-x-hidden text-left">
         <h2 className="w-screen flex text-2xl font-bold mb-4 bg-gray-300 text-left p-2">
           <FaBookOpen className="h-6 w-6 mt-2 mr-2" />
