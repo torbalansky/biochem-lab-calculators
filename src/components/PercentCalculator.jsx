@@ -14,6 +14,7 @@ const PercentCalculator = () => {
   const [vFinalVolume, setVFinalVolume] = useState(null);
   const [vResult, setVResult] = useState(null);
   const [vError, setVError] = useState('');
+  const [isTheoryVisible, setIsTheoryVisible] = useState(false);
 
   useEffect(() => {
     if (wPercent !== null && wVolume !== null) {
@@ -75,8 +76,13 @@ const PercentCalculator = () => {
         <h2 className="w-screen flex text-2xl font-bold mb-4 bg-gray-300 text-left p-2">
         <FaBookOpen className="h-6 w-6 mt-2 mr-2" />
             Theory
-          </h2>
-          <div>
+        </h2>
+          <button
+          onClick={() => setIsTheoryVisible(!isTheoryVisible)}
+          className="lg:hidden w-full text-sm p-2 bg-lime-500 text-white font-bold mb-2">
+          {isTheoryVisible ? 'Hide' : 'Show'} Theory
+          </button>
+      <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}>
             <p className="mb-4">
               <strong>What are Percent Solutions?</strong>
               <br />
@@ -99,9 +105,9 @@ const PercentCalculator = () => {
       </div>
 
       <div className="flex-1 p-6 bg-gray-700 flex flex-col">
-        <h1 className="text-2xl font-bold mb-6">w/v Percent Calculator</h1>
+        <h1 className="text-2xl font-bold lg:mb-6">w/v Percent Calculator</h1>
         <form className="space-y-8">
-          <div className="flex flex-col sm:flex-row sm:items-center">
+          <div className="flex flex-col sm:flex-row sm:items-center mt-6">
             <div className="flex-1">
               <label className="block mb-1 text-left">Enter Percent (% w/v):</label>
               <input

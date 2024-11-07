@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaFlask } from 'react-icons/fa';
+import { BiMessageRoundedError } from "react-icons/bi";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -13,18 +14,35 @@ const PCRCalculator = () => {
   const [pcrGradeWater, setPcrGradeWater] = useState('');
   const [totalReactions, setTotalReactions] = useState(1);
   const [totalVolumes, setTotalVolumes] = useState({});
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isTheoryVisible, setIsTheoryVisible] = useState(false);
 
   const calculateTotalVolume = () => {
-    const totalDNA = parseFloat(templateDNA || 0) * totalReactions;
-    const totalBuffer = parseFloat(pcrBuffer || 0) * totalReactions;
-    const totalFwdPrimer = parseFloat(forwardPrimer || 0) * totalReactions;
-    const totalRevPrimer = parseFloat(reversePrimer || 0) * totalReactions;
-    const totalDNTP = parseFloat(dNTPmix || 0) * totalReactions;
-    const totalPolymerase = parseFloat(dnaPolymerase || 0) * totalReactions;
-    const totalWater = parseFloat(pcrGradeWater || 0) * totalReactions;
+    if (
+      !templateDNA || parseFloat(templateDNA) === 0 ||
+      !pcrBuffer || parseFloat(pcrBuffer) === 0 ||
+      !forwardPrimer || parseFloat(forwardPrimer) === 0 ||
+      !reversePrimer || parseFloat(reversePrimer) === 0 ||
+      !dNTPmix || parseFloat(dNTPmix) === 0 ||
+      !dnaPolymerase || parseFloat(dnaPolymerase) === 0 ||
+      !pcrGradeWater || parseFloat(pcrGradeWater) === 0
+    ) {
+      setErrorMessage('All fields must be filled with values greater than 0.');
+      return;
+    }
+  
+    setErrorMessage('');
 
+    const totalDNA = parseFloat(templateDNA) * totalReactions;
+    const totalBuffer = parseFloat(pcrBuffer) * totalReactions;
+    const totalFwdPrimer = parseFloat(forwardPrimer) * totalReactions;
+    const totalRevPrimer = parseFloat(reversePrimer) * totalReactions;
+    const totalDNTP = parseFloat(dNTPmix) * totalReactions;
+    const totalPolymerase = parseFloat(dnaPolymerase) * totalReactions;
+    const totalWater = parseFloat(pcrGradeWater) * totalReactions;
+  
     const totalVolume = totalDNA + totalBuffer + totalFwdPrimer + totalRevPrimer + totalDNTP + totalPolymerase + totalWater;
-
+  
     setTotalVolumes({
       templateDNA: totalDNA,
       pcrBuffer: totalBuffer,
@@ -35,7 +53,7 @@ const PCRCalculator = () => {
       pcrGradeWater: totalWater,
       total: totalVolume,
     });
-  };
+  };  
 
   const handleClearFields = () => {
     setTemplateDNA('');
@@ -47,6 +65,7 @@ const PCRCalculator = () => {
     setPcrGradeWater('');
     setTotalReactions('');
     setTotalVolumes({});
+    setErrorMessage('');
   };
 
   useEffect(() => {
@@ -60,6 +79,12 @@ const PCRCalculator = () => {
         <FaFlask className="h-6 w-6 mt-2 mr-2 inline-block" />
         PCR Master Mix Theory
       </h2>
+          <button
+          onClick={() => setIsTheoryVisible(!isTheoryVisible)}
+          className="lg:hidden w-full text-sm p-2 bg-lime-500 text-white font-bold mb-2">
+          {isTheoryVisible ? 'Hide' : 'Show'} Theory
+          </button>
+      <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}>
       <p><strong>What is PCR?</strong></p>
       <p>
         Polymerase Chain Reaction (PCR) is a powerful and versatile molecular biology technique designed to 
@@ -84,7 +109,9 @@ const PCRCalculator = () => {
         This calculator aids in determining the total volume of each component required for a specified number of PCR reactions. 
         By inputting the desired number of reactions and the volumes for each component, researchers can quickly and accurately prepare their PCR Master Mix, optimizing their workflow and ensuring reliable results.
       </p>
+     </div>
     </div>
+
       <div className="w-full lg:w-1/3 p-1 bg-gray-700 flex flex-col text-xs">
         <h1 className="text-lg font-bold mb-3">PCR Master Mix Calculator</h1>
         <div className="mb-2 text-sm">
@@ -236,6 +263,13 @@ const PCRCalculator = () => {
               </tr>
             </tbody>
           </table>
+
+          {errorMessage && (
+            <div className="flex w-full bg-slate-300 rounded items-center justify-center text-red-800 p-2 text-sm mb-2">
+              <BiMessageRoundedError className='w-6 h-6 mr-2' />
+              {errorMessage}
+            </div>
+          )}
           
           <h3 className="font-bold mt-4 mb-4 bg-slate-950 text-lime-200 p-2">Total Volume: {totalVolumes.total || 0} µl</h3>
         </div>

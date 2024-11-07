@@ -4,9 +4,8 @@ import { TbSquareLetterM, TbRulerMeasure, TbSquareLetterA, TbChartHistogram } fr
 import { SiMoleculer, SiGithub, SiLinkedin, SiResearchgate, SiDwavesystems } from "react-icons/si";
 import { GiConcentrationOrb, GiDna2, GiConcentricCrescents, GiChemicalBolt, GiAntibody } from "react-icons/gi";
 import { GoGraph } from "react-icons/go";
-import { TfiPencilAlt } from "react-icons/tfi";
 import { LiaKeycdn } from "react-icons/lia";
-import { PiChartScatter } from "react-icons/pi";
+import { PiChartScatter, PiDna } from "react-icons/pi";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -22,14 +21,14 @@ const CalculatorHomePage = () => {
           <h1 className="text-xl md:text-3xl font-bold mb-4">
             Welcome to the Scientific Calculators Hub
           </h1>
-          <p className="text-base md:text-xl mb-4">
+          <p className="text-base md:text-md mb-4">
             Explore a wide range of scientific calculators to assist with your research and experiments. Choose from mass molarity, dilution, formula weight calculations, and more.
           </p>
-          <p className="text-lg md:text-xl">
-            Whether you're a scientist, student, or researcher, our tools will help streamline your calculations with precision and ease.
+          <p className="text-lg md:text-md">
+            Whether you're a scientist or student our tools will help streamline your calculations with precision and ease.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-4 lg:w-fit lg:h-2/3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-4 lg:w-[70%] lg:h-2/3">
           <Link to="/molarity" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
               <TbSquareLetterM className="h-8 w-8 mr-2 home-icon" />
@@ -96,7 +95,7 @@ const CalculatorHomePage = () => {
           <Link to="/protein280" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
               <SiDwavesystems  className="h-8 w-8 mr-2 home-icon" />
-              ProteinQuant
+              Protein Quant
             </span>
           </Link>
 
@@ -107,10 +106,10 @@ const CalculatorHomePage = () => {
             </span>
           </Link>
 
-          <Link to="/calculator" className="calculator-field">
+          <Link to="/dnaconcentration" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
-              <TfiPencilAlt className="h-8 w-8 mr-2 home-icon" />
-              LabBook
+              <PiDna className="h-8 w-8 mr-2 home-icon" />
+              DNA/RNA Quant
             </span>
           </Link>
 
@@ -131,7 +130,7 @@ const CalculatorHomePage = () => {
           <Link to="/calibration" className="calculator-field">
             <span className="flex items-center justify-center text-md font-semibold">
               <PiChartScatter className="h-8 w-8 mr-2 home-icon" />
-              CalibrationCurve
+              Calibration Curve
             </span>
           </Link>
         </div>

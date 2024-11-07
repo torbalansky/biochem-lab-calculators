@@ -16,6 +16,7 @@ const MichaelisMentenCalculator = () => {
   const [substrateUnit, setSubstrateUnit] = useState('M');
   const [timeUnit, setTimeUnit] = useState('s');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isTheoryVisible, setIsTheoryVisible] = useState(false);
 
   const concentrationConversions = {
     M: 1,
@@ -67,7 +68,12 @@ const MichaelisMentenCalculator = () => {
           <FaBookOpen className="h-6 w-6 mt-2 mr-2" />
           Theory
         </h2>
-        <div>
+          <button
+          onClick={() => setIsTheoryVisible(!isTheoryVisible)}
+          className="lg:hidden w-full text-sm p-2 bg-lime-500 text-white font-bold mb-2">
+          {isTheoryVisible ? 'Hide' : 'Show'} Theory
+          </button>
+      <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}>
           <p className="mb-4">
             <strong>What is the Michaelis-Menten equation used for?</strong>
           </p>

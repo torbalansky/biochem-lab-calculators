@@ -7,16 +7,6 @@ import { IoBeakerOutline, IoBeaker } from "react-icons/io5";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-const DilutionCalculator = () => {
-  const [stockConcentration, setStockConcentration] = useState(null);
-  const [stockConcentrationUnit, setStockConcentrationUnit] = useState('M');
-  const [finalVolume, setFinalVolume] = useState(null);
-  const [finalVolumeUnit, setFinalVolumeUnit] = useState('L');
-  const [desiredConcentration, setDesiredConcentration] = useState(null);
-  const [desiredConcentrationUnit, setDesiredConcentrationUnit] = useState('M');
-  const [stockVolume, setStockVolume] = useState(null);
-  const [errorMessage, setErrorMessage] = useState('');
-
   // Conversion Factors for Volume and Concentration
   const volumeConversions = {
     L: 1,
@@ -32,6 +22,17 @@ const DilutionCalculator = () => {
     pM: 1e-12,
     fM: 1e-15,
   };
+
+const DilutionCalculator = () => {
+  const [stockConcentration, setStockConcentration] = useState(null);
+  const [stockConcentrationUnit, setStockConcentrationUnit] = useState('M');
+  const [finalVolume, setFinalVolume] = useState(null);
+  const [finalVolumeUnit, setFinalVolumeUnit] = useState('L');
+  const [desiredConcentration, setDesiredConcentration] = useState(null);
+  const [desiredConcentrationUnit, setDesiredConcentrationUnit] = useState('M');
+  const [stockVolume, setStockVolume] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isTheoryVisible, setIsTheoryVisible] = useState(false);
 
   // Format Number Function with Rounding and Exponential Notation Handling
   const formatNumber = (number, decimalPlaces = 10) => {
@@ -57,12 +58,6 @@ const DilutionCalculator = () => {
   // Convert Volume to Selected Unit
   const convertVolumeToUnit = (volumeInLiters, unit) => {
     return volumeInLiters / volumeConversions[unit];
-  };
-
-  // Handle Input Changes and Conversion to Numbers
-  const handleInputChange = (setter) => (e) => {
-    const value = parseFloat(e.target.value);
-    setter(isNaN(value) ? null : value); // Set to null if input is NaN
   };
 
   // Handle Automatic Recalculation
@@ -145,7 +140,12 @@ const DilutionCalculator = () => {
       <div className="flex-1 p-4 bg-slate-100 text-gray-800 overflow-y-auto overflow-x-hidden text-left">
         <h2 className="w-screen flex text-2xl font-bold mb-4 bg-gray-300 text-left p-2"><FaBookOpen className='h-6 w-6 mt-2 mr-2' />Theory
         </h2>
-        <div>
+          <button
+          onClick={() => setIsTheoryVisible(!isTheoryVisible)}
+          className="lg:hidden w-full text-sm p-2 bg-lime-500 text-white font-bold mb-2">
+          {isTheoryVisible ? 'Hide' : 'Show'} Theory
+          </button>
+      <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}>
           <p className="mb-4">
             <strong>What is Dilution?</strong><br /><br />
             Dilution refers to the process of lowering the concentration of a solution with known molarity. 

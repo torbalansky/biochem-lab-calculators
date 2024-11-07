@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { FaBookOpen } from "react-icons/fa";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { BlockMath } from 'react-katex';
+import 'katex/dist/katex.min.css';
 
 const ProteinAbs280Calculator = () => {
   const [proteinType, setProteinType] = useState('IgG');
@@ -15,6 +17,7 @@ const ProteinAbs280Calculator = () => {
   const [customMolWeight, setCustomMolWeight] = useState(null);
   const [customExtCoeff, setCustomExtCoeff] = useState(null);
   const [pI, setPI] = useState(null);
+  const [isTheoryVisible, setIsTheoryVisible] = useState(false);
 
   const pKaValues = {
     N_term: 9.6,
@@ -169,6 +172,12 @@ const ProteinAbs280Calculator = () => {
         <FaBookOpen className="h-6 w-6 mt-2 mr-2" />
         Protein Absorbance at 280 nm
         </h2>
+          <button
+          onClick={() => setIsTheoryVisible(!isTheoryVisible)}
+          className="lg:hidden w-full text-sm p-2 bg-lime-500 text-white font-bold mb-2">
+          {isTheoryVisible ? 'Hide' : 'Show'} Theory
+          </button>
+      <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}>
         <p className="mb-2">
         This calculator determines protein concentration based on absorbance at 280 nm, using the Beer-Lambert Law—a key principle in biochemistry and analytical chemistry. Absorbance at 280 nm is particularly useful for protein quantification because certain amino acids (notably tryptophan, tyrosine, and cysteine) absorb ultraviolet light strongly at this wavelength. This property allows us to estimate the concentration of a protein solution without modifying or damaging the protein.
         </p>
@@ -188,12 +197,12 @@ const ProteinAbs280Calculator = () => {
             <li><strong>l:</strong> Path length of the cuvette or container (cm)</li>
         </ul>
 
-        <h3 className="text-xl font-semibold mb-2">Practical Application</h3>
+        <h3 className="text-xl font-semibold mb-2 mt-2">Practical Application</h3>
         <p className="mb-2">
         For convenience, the formula is often rearranged to calculate protein concentration:
         </p>
         <p className="mb-2 font-mono text-sm bg-gray-100 p-2 rounded">
-        C = A / (ε × l)
+        <BlockMath>{`C = \\frac{A}{\\varepsilon \\times l}`}</BlockMath>
         </p>
         <p className="mb-2">
         This calculator adapts the formula to output concentration in mg/mL, a common unit in biochemical applications, by incorporating the protein’s molecular weight.
@@ -210,8 +219,8 @@ const ProteinAbs280Calculator = () => {
         <p className="mb-2">
         This method provides a non-destructive and efficient means of quantifying proteins, essential in protein biochemistry for tasks ranging from enzyme assays to protein purification monitoring.
         </p>
+     </div>
     </div>
-
 
       <div className="flex-1 p-2 bg-gray-700 flex flex-col">
         <h1 className="text-xl font-bold mb-1">Protein Concentration Calculator</h1>
@@ -243,7 +252,7 @@ const ProteinAbs280Calculator = () => {
                 className="w-32 h-7 mt-1 p-1 border text-xs bg-gray-600 rounded"
                 placeholder="e.g., P12345"
               />
-              <button onClick={fetchFastaSequence} className="m-1 px-2 py-1 text-sm bg-blue-300 text-black rounded transition-all duration-200 ease-in-out hover:scale-105 font-semibold">
+              <button onClick={fetchFastaSequence} className="m-1 px-2 py-1 text-sm bg-blue-300 text-black transition-all duration-200 ease-in-out hover:scale-105 font-semibold">
                 Get Sequence
               </button>
             </div>
@@ -312,14 +321,14 @@ const ProteinAbs280Calculator = () => {
           <button
             type="button"
             onClick={handleCalculate}
-            className="px-4 py-1 cursor-pointer mb-1 transition-all duration-200 ease-in-out hover:scale-110 font-semibold bg-green-300 text-black rounded"
+            className="px-4 py-1 cursor-pointer mb-1 transition-all duration-200 ease-in-out hover:scale-110 font-semibold bg-green-300 text-black"
           >
             Calculate
           </button>
           <button
             type="button"
             onClick={handleClearFields}
-            className="w-[100px] ml-2 px-4 py-1 cursor-pointer mb-1 transition-all duration-200 ease-in-out hover:scale-110 font-semibold bg-violet-300 text-black rounded"
+            className="w-[100px] ml-2 px-4 py-1 cursor-pointer mb-1 transition-all duration-200 ease-in-out hover:scale-110 font-semibold bg-violet-300 text-black"
           >
             Clear
           </button>
