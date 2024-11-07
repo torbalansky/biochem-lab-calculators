@@ -12,6 +12,7 @@ const AntibodyDilutionCalculator = () => {
   const [selectedFinalVolume, setSelectedFinalVolume] = useState('');
   const [antibodyVolume, setAntibodyVolume] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isTheoryVisible, setIsTheoryVisible] = useState(false);
 
   const dilutions = [
     '1:100', '1:250', '1:500', '1:1000', '1:2000', 
@@ -63,9 +64,14 @@ useEffect(() => {
     <div className="flex flex-col lg:flex-row text-center text-white bg-slate-900 app-container content" data-aos="zoom-out-down">
       <div className="flex-1 p-6 text-gray-800 bg-slate-100 overflow-y-auto overflow-x-hidden text-left">
         <h2 className="w-screen flex text-2xl font-bold mb-4 bg-gray-300 text-left p-2"><FaBookOpen className='h-6 w-6 mt-2 mr-2'/>Theory</h2>
-        <div>
+          <button
+          onClick={() => setIsTheoryVisible(!isTheoryVisible)}
+          className="lg:hidden w-full text-sm p-2 bg-lime-500 text-white font-bold mb-2">
+          {isTheoryVisible ? 'Hide' : 'Show'} Theory
+          </button>
+      <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}>
         <p className="mb-4">
-      <strong>Western Blot Antibody Dilution</strong><br />
+          <strong>Western Blot Antibody Dilution</strong><br />
         </p>
         <p className="mb-4">
         Antibody dilutions are used in lab techniques like Western Blot to create solutions with the right concentration from a stock antibody. A dilution factor, written as X:Y, tells you how much stock solution you need to add to enough diluent to reach the total volume. For example, a 1:250 dilution means mixing 1 part antibody stock with 249 parts diluent. 

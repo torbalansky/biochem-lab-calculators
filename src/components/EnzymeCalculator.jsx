@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FaBookOpen } from "react-icons/fa";
 import { BiMessageRoundedError } from "react-icons/bi";
+import { BlockMath } from 'react-katex';
+import 'katex/dist/katex.min.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -13,6 +15,7 @@ const EnzymeCalculator = () => {
   const [stockUnit, setStockUnit] = useState('mg');
   const [volumeUnit, setVolumeUnit] = useState('mL');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isTheoryVisible, setIsTheoryVisible] = useState(false);
 
   const volumeConversions = {
     L: 1,
@@ -35,13 +38,16 @@ const EnzymeCalculator = () => {
       setErrorMessage('Please fill in all fields.');
       return;
     }
+
+    setResult('');
+    setErrorMessage('');
   
     const convertedDesiredActivity = parseFloat(desiredActivity) * volumeConversions[desiredUnit];
     const convertedStockActivity = parseFloat(stockActivity) * weightConversions[stockUnit];
     const convertedVolume = parseFloat(finalVolume) * volumeConversions[volumeUnit];
   
     if (convertedStockActivity === 0) {
-      setErrorMessage('Stock enzyme activity cannot be zero.');
+      setErrorMessage('Please enter valid values.');
       return;
     }
   
@@ -66,7 +72,13 @@ const EnzymeCalculator = () => {
     <FaBookOpen className="h-6 w-6 mt-2 mr-2" />
     Theory
     </h2>
-    <div>
+    <button
+        onClick={() => setIsTheoryVisible(!isTheoryVisible)}
+        className="lg:hidden w-full text-sm p-2 bg-lime-500 text-white font-bold mb-2">
+        {isTheoryVisible ? 'Hide' : 'Show'} Theory
+    </button>
+
+      <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}>
         <p className="mb-4">
         <strong>What is Enzyme Activity?</strong>
         </p>
@@ -98,9 +110,7 @@ const EnzymeCalculator = () => {
         The formula for calculating enzyme activity is:
         </p>
         <pre className="bg-gray-200 p-2 mb-4">
-        <code>
-            E<sub>mass</sub> = (E<sub>desired</sub> × V<sub>final</sub>) / E<sub>stock</sub>
-        </code>
+        <BlockMath>{`E_{mass} = \\frac{E_{desired} \\times V_{final}}{E_{stock}}`}</BlockMath>
         </pre>
         <p className="mb-4">
         <strong>Where:</strong></p>
@@ -114,9 +124,7 @@ const EnzymeCalculator = () => {
         <strong>Example:</strong> For E<sub>desired</sub> = 2 units/ml, V<sub>final</sub> = 5 ml, and E<sub>stock</sub> = 10 units/mg:
         </p>
         <pre className="bg-gray-200 p-2 mb-4">
-        <code>
-            E<sub>mass</sub> = (2 × 5) / 10 = 1 mg
-        </code>
+        <BlockMath>{`E_{mass} = \\frac{2 \\times 5}{10} = 1 \\text{ mg}`}</BlockMath>
         </pre>
         <p className="mb-4">
         <strong>Importance of Measuring Enzyme Activity</strong>
@@ -133,12 +141,12 @@ const EnzymeCalculator = () => {
         </div>
       </div>
 
-      <div className="flex-1 p-6 bg-gray-700 flex flex-col">
-        <h1 className="text-2xl font-bold mb-6">Enzyme Activity Calculator</h1>
+      <div className="flex-1 p-4 bg-gray-700 flex flex-col">
+        <h1 className="text-2xl font-bold mb-4">Enzyme Activity Calculator</h1>
         <form className="space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-center">
             <div className="flex-1">
-              <label className="block mb-1 text-center lg:mr-24">Enter Desired Enzyme Activity:</label>
+              <label className="block text-center lg:mr-24 text-sm">Enter Desired Enzyme Activity:</label>
               <input
                 type="number"
                 value={desiredActivity}
@@ -156,7 +164,7 @@ const EnzymeCalculator = () => {
 
           <div className="flex flex-col sm:flex-row sm:items-center">
             <div className="flex-1">
-              <label className="block mb-1 text-center lg:mr-24">Stock Enzyme Activity:</label>
+              <label className="block text-center lg:mr-24 text-sm">Stock Enzyme Activity:</label>
               <input
                 type="number"
                 value={stockActivity}
@@ -174,7 +182,7 @@ const EnzymeCalculator = () => {
 
           <div className="flex flex-col sm:flex-row sm:items-center">
             <div className="flex-1">
-              <label className="block mb-1 text-center lg:mr-24">Enter Final Volume:</label>
+              <label className="block text-center lg:mr-24 text-sm">Enter Final Volume:</label>
               <input
                 type="number"
                 value={finalVolume}
@@ -197,7 +205,7 @@ const EnzymeCalculator = () => {
           )}
 
           {errorMessage && (
-            <p className="flex w-full bg-slate-300 rounded items-center justify-center text-red-800 p-2 text-1xl">
+            <p className="flex w-full bg-slate-300 rounded items-center justify-center text-red-800 p-1 text-1xl">
               <BiMessageRoundedError className='w-8 h-8 mr-1' />
               {errorMessage}
             </p>
@@ -207,14 +215,14 @@ const EnzymeCalculator = () => {
             <button
               type="button"
               onClick={calculateEnzymeMass}
-              className="px-4 py-2 cursor-pointer mb-2 transition-all duration-200 ease-in-out hover:scale-110 font-semibold bg-green-300 text-black"
+              className="px-4 py-2 cursor-pointer mb-1 transition-all duration-200 ease-in-out hover:scale-110 font-semibold bg-green-300 text-black"
             >
               Calculate
             </button>
             <button
               type="button"
               onClick={handleClearFields}
-              className="w-[100px] ml-2 px-4 py-2 cursor-pointer mb-2 transition-all duration-200 ease-in-out hover:scale-110 font-semibold bg-violet-300 text-black"
+              className="w-[100px] ml-2 px-4 py-2 cursor-pointer mb-1 transition-all duration-200 ease-in-out hover:scale-110 font-semibold bg-violet-300 text-black"
             >
               Clear
             </button>

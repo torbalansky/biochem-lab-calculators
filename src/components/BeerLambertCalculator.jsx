@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaBeer } from 'react-icons/fa';
+import { BiMessageRoundedError } from "react-icons/bi";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -8,7 +9,8 @@ const BeerLambertCalculator = () => {
   const [pathLength, setPathLength] = useState('');
   const [concentration, setConcentration] = useState('');
   const [absorbance, setAbsorbance] = useState('');
-  const [error, setError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isTheoryVisible, setIsTheoryVisible] = useState(false);
 
   const calculateMissingValue = () => {
     const coeff = parseFloat(extinctionCoefficient);
@@ -35,11 +37,11 @@ const BeerLambertCalculator = () => {
       setExtinctionCoefficient(Number(calculatedValue.toPrecision(10))); 
     }
     else {
-      setError('Please enter values for any three of the four parameters.');
+      setErrorMessage('Please enter values for any three of the four parameters.');
       return;
     }
   
-    setError('');
+    setErrorMessage('');
   };  
 
   const handleClearFields = () => {
@@ -47,7 +49,7 @@ const BeerLambertCalculator = () => {
     setPathLength('');
     setConcentration('');
     setAbsorbance('');
-    setError('');
+    setErrorMessage('');
   };
 
   useEffect(() => {
@@ -61,7 +63,12 @@ const BeerLambertCalculator = () => {
           <FaBeer className="h-6 w-6 mt-2 mr-2" />
           Beer Lambert Law Theory
         </h2>
-        <div>
+          <button
+          onClick={() => setIsTheoryVisible(!isTheoryVisible)}
+          className="lg:hidden w-full text-sm p-2 bg-lime-500 text-white font-bold mb-2">
+          {isTheoryVisible ? 'Hide' : 'Show'} Theory
+          </button>
+      <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}>
           <p className="mb-4"><strong>What is the Beer-Lambert Law?</strong></p>
             The Beer-Lambert Law relates the absorbance of light to the properties of the material through which the light is traveling.
             The formula is given by:
@@ -142,9 +149,12 @@ const BeerLambertCalculator = () => {
           />
         </div>
 
-        {error && (
-          <p className="text-red-500 text-center mb-4">{error}</p>
-        )}
+        {errorMessage && (
+            <div className="flex w-full bg-slate-300 rounded items-center justify-center text-red-800 p-2 text-1xl mb-2">
+              <BiMessageRoundedError className='w-6 h-6 mr-2' />
+              {errorMessage}
+            </div>
+          )}
 
         <div className="flex justify-center">
           <button

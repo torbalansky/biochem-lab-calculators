@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { BiMessageRoundedError } from "react-icons/bi";
 import { FaWeight, FaBookOpen   } from "react-icons/fa";
 import { SiMoleculer } from "react-icons/si";
@@ -7,6 +7,8 @@ import { IoBeakerOutline, IoBeaker  } from "react-icons/io5";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Link } from 'react-router-dom';
+import { BlockMath } from 'react-katex';
+import 'katex/dist/katex.min.css';
 
 const MolarityCalculator = () => {
   const [formulaWeight, setFormulaWeight] = useState('');
@@ -16,23 +18,24 @@ const MolarityCalculator = () => {
   const [concentrationUnit, setConcentrationUnit] = useState('M');
   const [mass, setMass] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isTheoryVisible, setIsTheoryVisible] = useState(false);
 
   // Conversion factors for volume units to liters
-  const volumeConversions = {
+  const volumeConversions = useMemo(() => ({
     L: 1,
     mL: 1e-3,
     μL: 1e-6,
-  };
+  }), []);
 
   // Conversion factors for concentration units to molarity (M)
-  const concentrationConversions = {
+  const concentrationConversions = useMemo(() => ({
     M: 1,
     mM: 1e-3,
     μM: 1e-6,
     nM: 1e-9,
     pM: 1e-12,
     fM: 1e-15,
-  };
+  }), []);
 
   // Format Number Function with Rounding
   const formatNumber = (number, decimalPlaces = 10) => {
@@ -53,12 +56,6 @@ const MolarityCalculator = () => {
 
       return formatted;
     }
-  };
-
-
-  // Convert Volume to Selected Unit
-  const convertVolumeToUnit = (volumeInLiters, unit) => {
-    return volumeInLiters / volumeConversions[unit];
   };
 
   // Handle Automatic Recalculation
@@ -106,7 +103,12 @@ const MolarityCalculator = () => {
     <div className="flex flex-col lg:flex-row text-center text-white bg-slate-900 app-container content" data-aos="zoom-out-down">
       <div className="flex-1 p-6 text-gray-800 bg-slate-100 overflow-y-auto overflow-x-hidden text-left">
         <h2 className="w-screen flex text-2xl font-bold mb-4 bg-gray-300 text-left p-2"><FaBookOpen className='h-6 w-6 mt-2 mr-2'/>Theory</h2>
-        <div>
+          <button
+          onClick={() => setIsTheoryVisible(!isTheoryVisible)}
+          className="lg:hidden w-full text-sm p-2 bg-lime-500 text-white font-bold mb-2">
+          {isTheoryVisible ? 'Hide' : 'Show'} Theory
+          </button>
+      <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}>
           <p className="mb-4">
             <strong>What is Mass?</strong><br />
             Mass is the amount of matter in an object and is typically measured in grams (g). It is a fundamental property that quantifies the inertia of an object.
@@ -115,7 +117,9 @@ const MolarityCalculator = () => {
             <strong>What is Molar Concentration?</strong><br />
             Molar concentration, or molarity (M), indicates the number of moles of solute present in one liter of solution.
             Mass, molar concentration, volume, and formula weight are connected by the following equation:<br />
-            Mass (g) = Concentration (mol/L) × Volume (L) × Formula Weight (g/mol)
+            <BlockMath>
+               {`M (g) = C (mol/L) \\times V (L) \\times FW (g/mol)`}
+            </BlockMath>
           </p>
           <p className="mb-4">
             <strong>How to Calculate Formula Weight (FW)?</strong><br />

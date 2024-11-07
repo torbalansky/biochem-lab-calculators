@@ -56,12 +56,13 @@ const Navbar = () => {
     { name: "Unit Conversion", path: "/unitConversion" },
     { name: "PCR Master Mix", path: "/PCR" },
     { name: "Antibody Dilution Calculator", path: "/antibody" },
-    { name: "Protein Concentration Calculator", path: "/protein280" },
-    { name: "Lab Book and Calculator", path: "/calculator" },
+    { name: "Protein Concentration", path: "/protein280" },
+    { name: "DNA/RNA Concentration", path: "/dnaconcentration" },
     { name: "Calculate Kd", path: "/kdcalculator"},
     { name: "Enzyme Activity", path: "/enzyme"},
     { name: "Reaction rate (V)", path: "/michaelismenten"},
     { name: "Calibration Curve", path: "/calibration"},
+    { name: "Lab Book and Calculator", path: "/calculator" },
   ];
 
   const isActive = (path) => {

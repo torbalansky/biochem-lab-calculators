@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { FaBookOpen } from "react-icons/fa";
+import { BiMessageRoundedError } from "react-icons/bi";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { BlockMath, InlineMath } from 'react-katex';
+import 'katex/dist/katex.min.css';
 
 const KdCalculator = () => {
   const [deltaG, setDeltaG] = useState('');
   const [temperature, setTemperature] = useState(298);
   const [kd, setKd] = useState('');
-  const [error, setError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isTheoryVisible, setIsTheoryVisible] = useState(false);
 
   const calculateKd = () => {
     const deltaGValue = parseFloat(deltaG);
@@ -17,9 +21,9 @@ const KdCalculator = () => {
       const R = 0.001987;
       const kdValue = Math.exp(deltaGValue / (R * tempValue));
       setKd(kdValue.toExponential(2));
-      setError('');
+      setErrorMessage('');
     } else {
-      setError('Please enter valid values for ΔG and temperature.');
+      setErrorMessage('Please enter valid values for ΔG and temperature.');
       setKd('');
     }
   };
@@ -28,7 +32,7 @@ const KdCalculator = () => {
     setDeltaG('');
     setKd('');
     setTemperature(298);
-    setError('');
+    setErrorMessage('');
   };
 
   useEffect(() => {
@@ -42,43 +46,47 @@ const KdCalculator = () => {
           <FaBookOpen className="h-6 w-6 mr-2" />
           Theory
         </h2>
+          <button
+          onClick={() => setIsTheoryVisible(!isTheoryVisible)}
+          className="lg:hidden w-full text-sm p-2 bg-lime-500 text-white font-bold mb-2">
+          {isTheoryVisible ? 'Hide' : 'Show'} Theory
+          </button>
+      <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}>
         <p>
           The binding constant can be understood through the equilibrium reaction between a receptor 
           R and a ligand L, represented as 
-          R + L ⇌ RL. In this reaction, the rate at which the receptor and ligand combine (association) is denoted as K<sub>on</sub>, while the rate at which the complex RL dissociates back into R and L is represented as K<sub>off</sub>. The relationship between these rates can be expressed as:
+        </p>
+          <BlockMath>{`R + L \\rightleftharpoons RL`}</BlockMath>
+        <p>
+            In this reaction, the rate at which the receptor and ligand combine (association) is denoted as 
+            <InlineMath>{`K_{on}`}</InlineMath>, while the rate at which the complex RL dissociates back into R and L is represented as 
+            <InlineMath>{`K_{off}`}</InlineMath>. The relationship between these rates can be expressed as:
+        </p>
+          <BlockMath>{`K_{on} [R][L] = K_{off} [RL]`}</BlockMath>
+        <p>
+            From this, we derive the equilibrium association constant <InlineMath>{`K_{a}`}</InlineMath> defined as:
+        </p>
+          <BlockMath>{`K_{a} = \\frac{K_{on}}{K_{off}}`}</BlockMath>
+        <p>
+            The equilibrium dissociation constant <InlineMath>{`K_{d}`}</InlineMath> is simply the reciprocal of the association constant:
+        </p>
+          <BlockMath>{`K_{d} = \\frac{1}{K_{a}}`}</BlockMath>
+        <p>
+            This constant is a critical measure of binding affinity, often used to indicate the strength of the interaction between a receptor and its ligand.
         </p>
         <p>
-          K<sub>on</sub>[R][L] = K<sub>off</sub>[RL]
+            Furthermore, the dissociation constant <InlineMath>{`K_{d}`}</InlineMath> is quantitatively related to the Gibbs free energy change 
+            <InlineMath>{`\\Delta G`}</InlineMath> of the reaction by the equation:
         </p>
-        <p>
-          From this, we derive the equilibrium association constant K<sub>a</sub> defined as:
-        </p>
-        <p>
-          K<sub>a</sub> = K<sub>on</sub> / K<sub>off</sub>
-        </p>
-        <p>
-          The equilibrium dissociation constant K<sub>d</sub> is simply the reciprocal of the association constant:
-        </p>
-        <p>
-          K<sub>d</sub> = 1 / K<sub>a</sub>
-        </p>
-        <p>
-          This constant is a critical measure of binding affinity, often used to indicate the strength of the interaction between a receptor and its ligand.
-        </p>
-        <p>
-          Furthermore, the dissociation constant K<sub>d</sub> is quantitatively related to the Gibbs free energy change ΔG of the reaction by the equation:
-        </p>
-        <p>
-          ΔG = RT ln K<sub>d</sub>
-        </p>
+          <BlockMath>{`\\Delta G = RT \\ln K_{d}`}</BlockMath>
         <p>Where:</p>
-          <ul>
+        <ul>
             <li><strong>R</strong> is the gas constant,</li>
             <li><strong>T</strong> is the absolute temperature in Kelvin.</li>
-          </ul>
+        </ul>
 
         <p>
-          At a standard temperature of 298 K (25 °C), the relationship between ΔG and K<sub>d</sub> is illustrated in the following table:
+            At a standard temperature of 298 K (25 °C), the relationship between <InlineMath>{`\\Delta G`}</InlineMath> and <InlineMath>{`K_{d}`}</InlineMath> is illustrated in the following table:
         </p>
         <table className="w-full text-center bg-gray-200 rounded">
           <thead>
@@ -108,6 +116,7 @@ const KdCalculator = () => {
           </tbody>
         </table>
       </div>
+    </div>
       
       <div className="flex-1 p-4 bg-gray-700">
         <h1 className="text-2xl font-bold mb-6 text-center">Dissociation Constant Calculator</h1>
@@ -133,8 +142,17 @@ const KdCalculator = () => {
           />
         </div>
 
-        {error && (
-          <p className="text-red-500 text-center mb-4">{error}</p>
+        {errorMessage && (
+            <div className="flex w-full bg-slate-300 rounded items-center justify-center text-red-800 p-2 text-1xl mb-2">
+              <BiMessageRoundedError className='w-6 h-6 mr-2' />
+              {errorMessage}
+            </div>
+          )}
+
+        {kd && (
+          <div className="w-full p-2 rounded flex items-center justify-center bg-slate-900 text-green-400 text-lg mb-2">
+            <strong>Calculated K<sub>d</sub>:</strong>&nbsp; {kd} mol/L
+          </div>
         )}
 
         <div className="flex justify-center mb-4">
@@ -153,12 +171,6 @@ const KdCalculator = () => {
             Clear
           </button>
         </div>
-
-        {kd && (
-          <div className="text-center text-lg">
-            <strong>Calculated K<sub>d</sub>:</strong> {kd} mol/L
-          </div>
-        )}
       </div>
     </div>
   );

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaExchangeAlt } from 'react-icons/fa';
+import { BlockMath } from 'react-katex';
+import 'katex/dist/katex.min.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -50,6 +52,8 @@ const UnitConverter = () => {
   const [watts, setWatts] = useState('');
   const [volts, setVolts] = useState('');
   const [calculationType, setCalculationType] = useState('ohms');
+
+  const [isTheoryVisible, setIsTheoryVisible] = useState(false);
 
   const handleCalculateVolts = () => {
     const ampsValue = parseFloat(amps);
@@ -246,11 +250,15 @@ const UnitConverter = () => {
   const renderTheory = () => {
     return (
       <div data-aos="fade-right">
-        <p><strong>Theory of Unit Conversions</strong></p> <br />
-        <p>Unit conversions are essential in science and engineering to ensure consistency and accuracy in measurements.</p>
+        <button
+            onClick={() => setIsTheoryVisible(!isTheoryVisible)}
+            className="lg:hidden w-full text-sm p-2 bg-lime-500 text-white font-bold mb-2"
+          >
+            {isTheoryVisible ? 'Hide' : 'Show'} Theory
+        </button>
         
         {selectedConversion === 'temperature' && (
-          <div><br />
+          <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}><br />
             <p><strong>Temperature Conversion</strong></p><br />
             <p>Temperature is a measure of the thermal energy of a system and can be expressed in three primary units:</p>
             <ul><br />
@@ -260,16 +268,19 @@ const UnitConverter = () => {
             </ul>
             <p>Conversions between these units can be done using the following formulas:</p><br />
             <ul>
-              <li>From Celsius to Fahrenheit: \( F = (C \times \frac{9}{5}) + 32 \)</li><br />
-              <li>From Fahrenheit to Celsius: \( C = (F - 32) \times \frac{5}{9} \)</li><br />
-              <li>From Celsius to Kelvin: \( K = C + 273.15 \)</li><br />
-              <li>From Kelvin to Celsius: \( C = K - 273.15 \)</li><br />
+              <li> From Celsius to Fahrenheit: <BlockMath>{`F = C \\times \\frac{9}{5} + 32`}</BlockMath></li>
+              <br />
+              <li> From Fahrenheit to Celsius: <BlockMath>{`C = (F - 32) \\times \\frac{5}{9}`}</BlockMath></li>
+              <br />
+              <li>From Celsius to Kelvin: <BlockMath>{`K = C + 273.15`}</BlockMath></li>
+              <br />
+              <li>From Kelvin to Celsius: <BlockMath>{`C = K - 273.15`}</BlockMath></li>
             </ul>
           </div>
         )}
   
         {selectedConversion === 'length' && (
-          <div><br />
+          <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}><br />
             <h4><strong>Length Conversion</strong></h4><br />
             <p>Length is a measure of distance and can be expressed in various units, depending on the scale of measurement. Common units of length include:</p>
             <ul><br />
@@ -287,7 +298,7 @@ const UnitConverter = () => {
         )}
   
         {selectedConversion === 'density' && (
-          <div><br />
+          <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}><br />
             <p><strong>Density Conversion</strong></p>
             <p>Density is defined as mass per unit volume and is commonly expressed in:</p><br />
             <ul><br />
@@ -302,7 +313,7 @@ const UnitConverter = () => {
         )}
   
         {selectedConversion === 'weight' && (
-          <div><br />
+          <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}><br />
             <p><strong>Weight Conversion</strong></p><br />
             <p>Weight refers to the mass of an object and can be measured in several units:</p><br />
             <ul>
@@ -320,7 +331,7 @@ const UnitConverter = () => {
         )}
   
         {selectedConversion === 'volume' && (
-          <div><br />
+          <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}><br />
             <p><strong>Volume Conversion</strong></p><br />
             <p>Volume refers to the amount of space an object or substance occupies and can be measured in different units:</p><br />
             <ul>
@@ -338,7 +349,7 @@ const UnitConverter = () => {
         )}
 
         {selectedConversion === 'molarity' && (
-          <div><br />
+          <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}><br />
             <p><strong>Molarity Conversion</strong></p><br />
             <p>Molarity (M) is a way to express the concentration of a solution. It is defined as the number of moles of solute per liter of solution:</p><br />
             <p><strong>Formula:</strong></p>
@@ -360,7 +371,7 @@ const UnitConverter = () => {
         )}
 
         {selectedConversion === 'energy' && (
-          <div><br />
+          <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}><br />
           <p><strong>Energy Conversion</strong></p><br />
             <p>Common units for energy include:</p>
             <ul>
@@ -377,7 +388,7 @@ const UnitConverter = () => {
         )}
 
         {selectedConversion === 'watt' && (
-          <div><br />
+          <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}><br />
             <p><strong>Energy Conversion</strong></p><br />
             <p>Common units for energy include:</p>
             <ul>
@@ -396,7 +407,7 @@ const UnitConverter = () => {
         )}
 
         {selectedConversion === 'ampsToVolts' && (
-        <div><br />
+        <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}><br />
           <p><strong>Amps to Volts Conversion</strong></p><br />
           <p>The conversion from Amps (A) to Volts (V) can be done using two primary formulas, depending on whether you know the resistance (in ohms) or the power (in watts):</p><br />
           <ul>
@@ -422,7 +433,7 @@ const UnitConverter = () => {
       <div className="flex-1 p-4 bg-slate-100 text-gray-800 overflow-y-auto overflow-x-hidden text-left">
         <h2 className="w-screen flex text-2xl font-bold mb-4 bg-gray-300 text-left p-2">
           <FaExchangeAlt className="h-6 w-6 mt-2 mr-2" />
-          Unit Converter
+          Theory
         </h2>
         {renderTheory()}
       </div>

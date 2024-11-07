@@ -15,9 +15,10 @@ This app offers a variety of calculators for lab work, including:
 5. **Beer-Lambert Law Calculator** - Calculate absorbance, concentration, or molar absorptivity based on Beer-Lambert's law.
 6. **RCF to RPM Calculator** - Convert between Relative Centrifugal Force (RCF) and Revolutions Per Minute (RPM) for centrifugation.
 7. **PCR Master Mix Calculator** - Compute the required volume of each reagent in a PCR reaction for a given number of reactions.
-8. **Unit Conversion Tool** - Easily convert between different scientific units.
+8. **Unit Conversion Tool** - Easily convert between different units.
 9. **Antibody Dilution Calculator** - Easily calculate the required volume of antibody stock for Western Blot experiments based on your desired dilution factor and final volume.
-10. **LabBook and Simple Calculator** - A convenient tool for quickly documenting notes and calculations, featuring an integrated calculator for swift, on-the-go computations. Ideal for lab work and record-keeping.
+10. **Protein and DNA concentration Calculators** - Determine the concentration of protein or DNA in a sample using absorbance measurements.
+11. **Enzyme Activity Calculator** - Calculate the reaction rate of an enzyme-catalyzed reaction based on the Michaelis constant, substrate concentration, and Vmax. This tool provides the reaction rate in M/s, allowing for quick insights into enzymatic activity and efficiency at given substrate concentrations.
 
 ## Screenshot
 
@@ -28,7 +29,6 @@ This app offers a variety of calculators for lab work, including:
 - **React**: The app is developed using React for building interactive UIs.
 - **React Router**: For smooth navigation between different calculators.
 - **AOS (Animate on Scroll)**: For beautiful animations as you navigate through the app.
-- **React Icons**: For easy-to-use icons that enhance the visual appeal of the app.
 - **Tailwind CSS**: For styling the entire app with a utility-first approach.
 
 ## How to Use the App

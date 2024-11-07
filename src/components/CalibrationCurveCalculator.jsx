@@ -11,6 +11,7 @@ const CalibrationCurveCalculator = () => {
   const [signal, setSignal] = useState('');
   const [unknownConcentration, setUnknownConcentration] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isTheoryVisible, setIsTheoryVisible] = useState(false);
 
   const calculateConcentration = () => {
     if (!slope || !intercept || !signal) {
@@ -45,7 +46,12 @@ const CalibrationCurveCalculator = () => {
           <FaBookOpen className="h-6 w-6 mt-2 mr-2" />
           Theory
         </h2>
-        <div>
+          <button
+          onClick={() => setIsTheoryVisible(!isTheoryVisible)}
+          className="lg:hidden w-full text-sm p-2 bg-lime-500 text-white font-bold mb-2">
+          {isTheoryVisible ? 'Hide' : 'Show'} Theory
+          </button>
+      <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}>
           <p className="mb-4">
             <strong>What is a Calibration Curve?</strong>
             <br />

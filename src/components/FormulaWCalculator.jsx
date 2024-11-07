@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaBookOpen } from "react-icons/fa";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { BiMessageRoundedError } from "react-icons/bi";
 
 const ATOMIC_MASSES = {
     H: 1.008, He: 4.0026, Li: 6.94, Be: 9.0122, B: 10.81, C: 12.011, N: 14.007, O: 15.999, F: 18.998, Ne: 20.180,
@@ -35,12 +36,13 @@ const FormulaWCalculator = () => {
   const [formula, setFormula] = useState('');
   const [atoms, setAtoms] = useState([]);
   const [totalMolecularWeight, setTotalMolecularWeight] = useState(0);
-  const [error, setError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isTheoryVisible, setIsTheoryVisible] = useState(false);
 
   const calculateMolecularWeight = () => {
-    setError('');
+    setErrorMessage('');
         if (/[a-z]/.test(formula)) {
-            setError('Please use capital letters for element symbols (e.g., H2O instead of h2o).');
+            setErrorMessage('Please use capital letters for element symbols (e.g., H2O instead of h2o).');
             return;
     }
 
@@ -51,7 +53,7 @@ const FormulaWCalculator = () => {
     const calculatedAtoms = parsedAtoms.map((atom) => {
       const molarMass = ATOMIC_MASSES[atom.symbol];
       if (!molarMass) {
-        setError(`Unknown element: ${atom.symbol}`);
+        setErrorMessage(`Unknown element: ${atom.symbol}`);
         validFormula = false;
         return null;
       }
@@ -68,7 +70,7 @@ const FormulaWCalculator = () => {
 
       setAtoms(atomsWithPercentages);
       setTotalMolecularWeight(totalWeight.toFixed(2));
-      setError('');
+      setErrorMessage('');
     }
   };
 
@@ -76,7 +78,7 @@ const FormulaWCalculator = () => {
     setFormula('');
     setAtoms([]);
     setTotalMolecularWeight(0);
-    setError('');
+    setErrorMessage('');
   }
   
   useEffect(() => {
@@ -90,7 +92,12 @@ const FormulaWCalculator = () => {
           <FaBookOpen className="h-6 w-6 mt-2 mr-2" />
           Theory
         </h2>
-        <div>
+          <button
+          onClick={() => setIsTheoryVisible(!isTheoryVisible)}
+          className="lg:hidden w-full text-sm p-2 bg-lime-500 text-white font-bold mb-2">
+          {isTheoryVisible ? 'Hide' : 'Show'} Theory
+          </button>
+      <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}>
           <p className="mb-4">
             <strong>What is Molecular Weight?</strong>
             <br /><br />
@@ -109,9 +116,7 @@ const FormulaWCalculator = () => {
           A significant concept in this area is Avogadro's number (NA), which is approximately 6.0221 x 10²³. 
           The term "mole" refers to the quantity of substance that has a mass equivalent to its molecular 
           (or atomic) weight in grams. For instance, one mole of a substance with a molecular mass of one (1)
-          gram will contain Avogadro's number of molecules. Using this calculator, you can determine that, 
-          for example, a pollution concentration of 1 gram of benzene in a specific volume of water equates to 
-          approximately 7.7098 × 10²¹ molecules of benzene affecting that water!`
+          gram will contain Avogadro's number of molecules.
           </p>
         </div>
       </div>
@@ -129,9 +134,12 @@ const FormulaWCalculator = () => {
           />
         </div>
 
-        {error && (
-          <p className="text-red-500 text-center mb-4">{error}</p>
-        )}
+        {errorMessage && (
+            <div className="flex w-full bg-slate-300 rounded items-center justify-center text-red-800 p-2 text-1xl mb-2">
+              <BiMessageRoundedError className='w-6 h-6 mr-2' />
+              {errorMessage}
+            </div>
+          )}
 
         <table className="w-full table-auto bg-gray-700 text-white mb-4">
         <thead>
@@ -163,8 +171,8 @@ const FormulaWCalculator = () => {
         </table>
 
         {totalMolecularWeight > 0 && (
-          <div className="text-center text-lg text-green-400 mb-4">
-            <strong>Total Molecular Weight: </strong>
+          <div className="w-full p-2 rounded flex items-center justify-center bg-slate-900 text-green-400 text-lg mb-2">
+            <strong>Total Molecular Weight:&nbsp; </strong>
             {totalMolecularWeight} g/mol
           </div>
         )}
