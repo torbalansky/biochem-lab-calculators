@@ -17,6 +17,7 @@ import EnzymeCalculator from './components/EnzymeCalculator';
 import MichaelisMentenCalculator from './components/MichaelisMenten';
 import CalibrationCurveCalculator from './components/CalibrationCurveCalculator';
 import DNAconCalculator from './components/DNAconCalculator.jsx';
+import DNAoligos from './components/DNAoligoscalculator.jsx';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
             <Route path="michaelismenten" element={<MichaelisMentenCalculator />} />
             <Route path="calibration" element={<CalibrationCurveCalculator />} />
             <Route path="dnaconcentration" element={<DNAconCalculator />} />
+            <Route path="dnaoligos" element={<DNAoligos />} />
           </Routes>
         </div>
       </Router>

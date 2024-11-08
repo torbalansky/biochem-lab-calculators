@@ -105,7 +105,7 @@ const MolarityCalculator = () => {
         <h2 className="w-screen flex text-2xl font-bold mb-4 bg-gray-300 text-left p-2"><FaBookOpen className='h-6 w-6 mt-2 mr-2'/>Theory</h2>
           <button
           onClick={() => setIsTheoryVisible(!isTheoryVisible)}
-          className="lg:hidden w-full text-sm p-2 bg-lime-500 text-white font-bold mb-2">
+          className={`lg:hidden w-full text-sm p-2 font-bold mb-2 ${isTheoryVisible ? 'bg-red-200' : 'bg-lime-200'} text-blue`}>
           {isTheoryVisible ? 'Hide' : 'Show'} Theory
           </button>
       <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}>
@@ -117,10 +117,8 @@ const MolarityCalculator = () => {
             <strong>What is Molar Concentration?</strong><br />
             Molar concentration, or molarity (M), indicates the number of moles of solute present in one liter of solution.
             Mass, molar concentration, volume, and formula weight are connected by the following equation:<br />
-            <BlockMath>
-               {`M (g) = C (mol/L) \\times V (L) \\times FW (g/mol)`}
-            </BlockMath>
           </p>
+          <BlockMath>{`M (g) = C (mol/L) \\times V (L) \\times FW (g/mol)`}</BlockMath>
           <p className="mb-4">
             <strong>How to Calculate Formula Weight (FW)?</strong><br />
             The formula weight (also known as molecular mass) is the sum of the atomic weights of all atoms in a molecule. It is usually expressed in grams per mole (g/mol).

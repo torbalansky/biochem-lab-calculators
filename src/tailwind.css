@@ -192,8 +192,8 @@ html, body {
     }
 
     .calculator-field {
-      width: 220px;
-      height: 200px;
+      width: 180px;
+      height: 180px;
       background-color: #ade6da;
       border: 2px solid #ffffff;
       color: #1e293b;

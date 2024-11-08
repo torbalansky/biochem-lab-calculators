@@ -58,6 +58,7 @@ const Navbar = () => {
     { name: "Antibody Dilution Calculator", path: "/antibody" },
     { name: "Protein Concentration", path: "/protein280" },
     { name: "DNA/RNA Concentration", path: "/dnaconcentration" },
+    { name: "DNA/RNA oligos", path: "/dnaoligos" },
     { name: "Calculate Kd", path: "/kdcalculator"},
     { name: "Enzyme Activity", path: "/enzyme"},
     { name: "Reaction rate (V)", path: "/michaelismenten"},
@@ -113,16 +114,18 @@ const Navbar = () => {
             <li className="relative" ref={dropdownRef}>
               <button
                 onClick={toggleDropdown}
-                className="w-64 bg-gray-700 p-3 text-neonBlue hover:bg-gray-600 lg:mr-12"
+                className="w-64 border border-neonBlue bg-gray-700 p-3 text-neonBlue hover:bg-gray-600 lg:mr-12"
               >
                 Calculators
               </button>
               {dropdownOpen && (
-                <ul className="w-full absolute left-0 mt-1 bg-gray-700 p-2 shadow-lg">
+                <ul className="w-fit border border-neonBlue absolute left-0 mt-1 bg-gray-700 p-2 shadow-lg">
                   {calculators.map((calc, index) => (
                     <li key={index} className="my-0">
                       <button
-                        className={`block px-2 py-1 text-left hover:bg-gray-600 ${isActive(calc.path) ? 'bg-gray-600' : ''}`}
+                        className={`block px-4 py-px text-left hover:bg-gray-600 ${
+                          isActive(calc.path) ? 'bg-slate-900' : ''
+                        } ${index % 2 !== 0 ? 'text-indigo-100 w-full' : ''}`}
                         onClick={() => handleNavigation(calc.path)}
                       >
                         {calc.name}
@@ -144,19 +147,11 @@ const Navbar = () => {
           >
             <IoCloseSharp className='w-8 h-8'/>
           </button>
-          <ul className="p-2 flex flex-col gap-2">
-            <li>
-              <button
-                onClick={() => handleNavigation("/")}
-                className={`p-2 text-left hover:bg-gray-600 ${isActive('/') ? 'bg-transparent' : ''}`}
-              >
-                <HiOutlineHome className='w-12 h-10'/>
-              </button>
-            </li>
+          <ul className="ml-2 flex flex-col gap-1">
             {calculators.map((calc, index) => (
               <li key={index}>
                 <button
-                  className={`p-2 text-left hover:bg-gray-600 w-full ${isActive(calc.path) ? 'bg-gray-600' : ''}`}
+                  className={`p-1 text-left hover:bg-gray-600 w-full ${isActive(calc.path) ? 'bg-gray-600' : ''}`}
                   onClick={() => handleNavigation(calc.path)}
                 >
                   {calc.name}

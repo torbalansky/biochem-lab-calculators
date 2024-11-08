@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaBookOpen } from "react-icons/fa";
 import { BiMessageRoundedError } from "react-icons/bi";
-import { TbSquareLetterA } from "react-icons/tb";
+import { TbSquareLetterA, TbCircleLetterEFilled } from "react-icons/tb";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { BlockMath } from 'react-katex';
@@ -60,8 +60,7 @@ const DnaRnaCalculator = () => {
         </h2>
         <button
             onClick={() => setIsTheoryVisible(!isTheoryVisible)}
-            className="lg:hidden w-full text-sm p-2 bg-lime-500 text-white font-bold mb-2"
-          >
+            className={`lg:hidden w-full text-sm p-2 font-bold mb-2 ${isTheoryVisible ? 'bg-red-200' : 'bg-lime-200'} text-blue`}>
             {isTheoryVisible ? 'Hide' : 'Show'} Theory
           </button>
 
@@ -118,65 +117,6 @@ const DnaRnaCalculator = () => {
         <li><strong>εindividual bases:</strong> Sum of the extinction coefficients of individual nucleotides, excluding the first and last ones</li>
       </ul>
 
-      <h3 className="text-xl font-semibold mb-2 mt-2">Nearest Neighbor Extinction Coefficients (in M<sup>-1</sup>cm<sup>-1</sup>)</h3>
-      <p className="mb-2">
-        The following table shows the nearest neighbor extinction coefficients for DNA and RNA sequences at 260 nm, for the 5'/3' position:
-      </p>
-      <table className="table-auto w-full text-left border-collapse mb-4">
-        <thead>
-          <tr className="bg-gray-300">
-            <th className="border px-4 py-2">5'/3' Position</th>
-            <th className="border px-4 py-2">Adenine</th>
-            <th className="border px-4 py-2">Guanine</th>
-            <th className="border px-4 py-2">Cytosine</th>
-            <th className="border px-4 py-2">Thymine</th>
-            <th className="border px-4 py-2">Uracil</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="border px-4 py-2">Adenine</td>
-            <td className="border px-4 py-2">27,400</td>
-            <td className="border px-4 py-2">25,000</td>
-            <td className="border px-4 py-2">21,200</td>
-            <td className="border px-4 py-2">22,800</td>
-            <td className="border px-4 py-2">24,600</td>
-          </tr>
-          <tr>
-            <td className="border px-4 py-2">Guanine</td>
-            <td className="border px-4 py-2">25,200</td>
-            <td className="border px-4 py-2">21,600</td>
-            <td className="border px-4 py-2">17,600</td>
-            <td className="border px-4 py-2">20,000</td>
-            <td className="border px-4 py-2">20,000</td>
-          </tr>
-          <tr>
-            <td className="border px-4 py-2">Cytosine</td>
-            <td className="border px-4 py-2">21,200</td>
-            <td className="border px-4 py-2">18,000</td>
-            <td className="border px-4 py-2">14,600</td>
-            <td className="border px-4 py-2">15,200</td>
-            <td className="border px-4 py-2">17,200</td>
-          </tr>
-          <tr>
-            <td className="border px-4 py-2">Thymine</td>
-            <td className="border px-4 py-2">23,400</td>
-            <td className="border px-4 py-2">19,000</td>
-            <td className="border px-4 py-2">16,200</td>
-            <td className="border px-4 py-2">16,800</td>
-            <td className="border px-4 py-2">N/A</td>
-          </tr>
-          <tr>
-            <td className="border px-4 py-2">Uracil</td>
-            <td className="border px-4 py-2">24,000</td>
-            <td className="border px-4 py-2">21,200</td>
-            <td className="border px-4 py-2">16,200</td>
-            <td className="border px-4 py-2">N/A</td>
-            <td className="border px-4 py-2">19,600</td>
-          </tr>
-        </tbody>
-      </table>
-
       <h3 className="text-xl font-semibold mb-2 mt-2">Individual Base Extinction Coefficients (in M<sup>-1</sup>cm<sup>-1</sup>)</h3>
       <p className="mb-2">The following table lists the extinction coefficients for individual nucleotides:</p>
       <table className="table-auto w-full text-left border-collapse mb-4">
@@ -209,6 +149,14 @@ const DnaRnaCalculator = () => {
           </tr>
         </tbody>
       </table>
+
+      <p>However, as already mentioned to determine the extinction coefficients of your custom DNA/RNA oligos can be tricky, hence, we advice you to use our calculation tool:</p>
+      <Link to="/dnaoligos" className="flex justify-center">
+        <span className="p-2 mt-2 mb-4 lg:w-[50%] flex rounded-full items-center justify-center text-sm font-semibold bg-green-300 transition-all duration-200 ease-in-out hover:scale-110">
+          <TbCircleLetterEFilled className="h-6 w-4 mr-2" />
+          DNA/RNA oligo Calculation Tool
+        </span>
+      </Link>
       </div>
       </div>
 

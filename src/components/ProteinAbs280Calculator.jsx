@@ -174,7 +174,7 @@ const ProteinAbs280Calculator = () => {
         </h2>
           <button
           onClick={() => setIsTheoryVisible(!isTheoryVisible)}
-          className="lg:hidden w-full text-sm p-2 bg-lime-500 text-white font-bold mb-2">
+          className={`lg:hidden w-full text-sm p-2 font-bold mb-2 ${isTheoryVisible ? 'bg-red-200' : 'bg-lime-200'} text-blue`}>
           {isTheoryVisible ? 'Hide' : 'Show'} Theory
           </button>
       <div className={`lg:block ${isTheoryVisible ? 'block' : 'hidden'}`}>
@@ -202,8 +202,8 @@ const ProteinAbs280Calculator = () => {
         For convenience, the formula is often rearranged to calculate protein concentration:
         </p>
         <p className="mb-2 font-mono text-sm bg-gray-100 p-2 rounded">
-        <BlockMath>{`C = \\frac{A}{\\varepsilon \\times l}`}</BlockMath>
         </p>
+        <BlockMath>{`C = \\frac{A}{\\varepsilon \\times l}`}</BlockMath>
         <p className="mb-2">
         This calculator adapts the formula to output concentration in mg/mL, a common unit in biochemical applications, by incorporating the protein’s molecular weight.
         </p>

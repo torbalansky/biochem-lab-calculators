@@ -252,8 +252,7 @@ const UnitConverter = () => {
       <div data-aos="fade-right">
         <button
             onClick={() => setIsTheoryVisible(!isTheoryVisible)}
-            className="lg:hidden w-full text-sm p-2 bg-lime-500 text-white font-bold mb-2"
-          >
+            className={`lg:hidden w-full text-sm p-2 font-bold mb-2 ${isTheoryVisible ? 'bg-red-200' : 'bg-lime-200'} text-blue`}>
             {isTheoryVisible ? 'Hide' : 'Show'} Theory
         </button>
         
