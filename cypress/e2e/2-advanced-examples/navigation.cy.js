@@ -1,55 +1,40 @@
 /// <reference types="cypress" />
 
-context('Navigation', () => {
+describe('Navbar Functionality', () => {
   beforeEach(() => {
-    cy.visit('https://example.cypress.io')
-    cy.get('.navbar-nav').contains('Commands').click()
-    cy.get('.dropdown-menu').contains('Navigation').click()
-  })
+    cy.visit('https://biochem-lab-calculators.vercel.app/');
+  });
 
-  it('cy.go() - go back or forward in the browser\'s history', () => {
-    // https://on.cypress.io/go
+  it('Navbar should be visible on page load', () => {
+    cy.get('nav').should('be.visible');
+  });
 
-    cy.location('pathname').should('include', 'navigation')
+  it('should navigate to the correct pages', () => {
+    cy.get('button[title="Back to Home"]').click();
+    cy.location('pathname').should('eq', '/');
 
-    cy.go('back')
-    cy.location('pathname').should('not.include', 'navigation')
+    cy.get('a[title="LabBook and Calculator"]').click();
+    cy.location('pathname').should('eq', '/calculator');
+  });
 
-    cy.go('forward')
-    cy.location('pathname').should('include', 'navigation')
+  it('should open and navigate through the dropdown menu', () => {
+    cy.get('button').contains('Calculators').click();
+    cy.get('ul').should('be.visible');
+  });
 
-    // clicking back
-    cy.go(-1)
-    cy.location('pathname').should('not.include', 'navigation')
+  it('should maintain the default state after reload', () => {
+    cy.get('button').contains('Calculators').click();
+    cy.get('ul').should('be.visible');
+    cy.reload();
+    cy.get('ul').should('not.exist');
+  });
 
-    // clicking forward
-    cy.go(1)
-    cy.location('pathname').should('include', 'navigation')
-  })
+  it('should display the correct menu on different screen sizes', () => {
+    cy.viewport(1280, 720);
+    cy.get('.md\\:hidden').should('not.be.visible');
+    cy.get('.navbar').should('be.visible');
 
-  it('cy.reload() - reload the page', () => {
-    // https://on.cypress.io/reload
-    cy.reload()
-
-    // reload the page without using the cache
-    cy.reload(true)
-  })
-
-  it('cy.visit() - visit a remote url', () => {
-    // https://on.cypress.io/visit
-
-    // Visit any sub-domain of your current domain
-    // Pass options to the visit
-    cy.visit('https://example.cypress.io/commands/navigation', {
-      timeout: 50000, // increase total time for the visit to resolve
-      onBeforeLoad (contentWindow) {
-        // contentWindow is the remote page's window object
-        expect(typeof contentWindow === 'object').to.be.true
-      },
-      onLoad (contentWindow) {
-        // contentWindow is the remote page's window object
-        expect(typeof contentWindow === 'object').to.be.true
-      },
-    })
-  })
-})
+    cy.viewport('iphone-6');
+    cy.get('.navbar').should('not.be.visible');
+  });
+});

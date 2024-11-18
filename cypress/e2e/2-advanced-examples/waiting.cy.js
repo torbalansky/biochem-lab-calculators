@@ -1,30 +1,19 @@
-/// <reference types="cypress" />
-context('Waiting', () => {
+context('Home Page', () => {
   beforeEach(() => {
-    cy.visit('https://example.cypress.io/commands/waiting')
-  })
-  // BE CAREFUL of adding unnecessary wait times.
-  // https://on.cypress.io/best-practices#Unnecessary-Waiting
+    cy.visit('https://biochem-lab-calculators.vercel.app/');
+  });
 
-  // https://on.cypress.io/wait
-  it('cy.wait() - wait for a specific amount of time', () => {
-    cy.get('.wait-input1').type('Wait 1000ms after typing')
-    cy.wait(1000)
-    cy.get('.wait-input2').type('Wait 1000ms after typing')
-    cy.wait(1000)
-    cy.get('.wait-input3').type('Wait 1000ms after typing')
-    cy.wait(1000)
-  })
+  it('should load the homepage correctly', () => {
+    cy.get('h1').should('have.text', 'Welcome to the Scientific Calculators Hub');
+    cy.get('p').should('contain.text', 'Explore a wide range of scientific calculators to assist with your research and experiments');
+    cy.get('.home-content').should('be.visible');
+  });
 
-  it('cy.wait() - wait for a specific route', () => {
-    // Listen to GET to comments/1
-    cy.intercept('GET', '**/comments/*').as('getComment')
+  it('should display all calculator fields with icons', () => {
+    cy.get('.calculator-field').should('have.length', 15);
+  });
 
-    // we have code that gets a comment when
-    // the button is clicked in scripts.js
-    cy.get('.network-btn').click()
-
-    // wait for GET comments/1
-    cy.wait('@getComment').its('response.statusCode').should('be.oneOf', [200, 304])
-  })
-})
+  it('should trigger AOS animation on page load', () => {
+    cy.get('.home-content').should('be.visible');
+  });
+});

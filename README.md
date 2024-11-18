@@ -36,7 +36,7 @@ This app offers a variety of calculators for lab work, including:
 1. Visit the app at [https://biochem-lab-calculators.vercel.app/](https://biochem-lab-calculators.vercel.app/)
 2. On the homepage, select the calculator you need by clicking on it.
 3. Fill in the required fields with your experimental values, and hit **Calculate** to get your results.
-4. Use the **Clear** button to reset the fields and start over.
+4. Use the **Clear** button when applicable to reset the fields and start over.
 
 ## Installation & Running Locally
 
@@ -48,10 +48,18 @@ If you'd like to run the app locally or contribute, follow these steps:
 
 ### Clone the Repository
 
-1. git clone https://github.com/torbalansky/biochem-lab-calculators.git
-2. cd biochem-lab-calculators
-3. npm install
-4. npm start
+# Clone the repository
+``` git clone https://github.com/torbalansky/biochem-lab-calculators.git ```
+
+# Navigate into the project directory
+``` cd biochem-lab-calculators ```
+
+# Install the required dependencies
+``` npm install ```
+
+# Start the project
+``` npm start ```
+
 
 This will start the development server. You can view the app in your browser by navigating to http://localhost:3000
 
