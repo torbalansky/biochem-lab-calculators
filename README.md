@@ -48,7 +48,6 @@ If you'd like to run the app locally or contribute, follow these steps:
 
 ### Clone the Repository
 
-### Clone the repository
 ``` git clone https://github.com/torbalansky/biochem-lab-calculators.git ```
 
 ### Navigate into the project directory
