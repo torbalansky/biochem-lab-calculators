@@ -48,16 +48,16 @@ If you'd like to run the app locally or contribute, follow these steps:
 
 ### Clone the Repository
 
-# Clone the repository
+### Clone the repository
 ``` git clone https://github.com/torbalansky/biochem-lab-calculators.git ```
 
-# Navigate into the project directory
+### Navigate into the project directory
 ``` cd biochem-lab-calculators ```
 
-# Install the required dependencies
+### Install the required dependencies
 ``` npm install ```
 
-# Start the project
+### Start the project
 ``` npm start ```
 
 
